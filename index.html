@@ -1,0 +1,1101 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Website Resmi Desa Cimengeunteung</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- FontAwesome for Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Poppins', 'sans-serif'],
+                    },
+                    colors: {
+                        'desa-green': '#1b5e20',
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        html {
+            scroll-behavior: smooth;
+        }
+        /* Smooth transition for background slider */
+        #hero-section {
+            transition: background-image 0.5s ease-in-out;
+        }
+        
+        /* Nav link underline effect */
+        .nav-link {
+            position: relative;
+        }
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            bottom: -4px;
+            left: 0;
+            background-color: white;
+            transition: width 0.3s ease;
+        }
+        .nav-link:hover::after, .nav-link.active::after {
+            width: 100%;
+        }
+
+        /* Visitor Counter Toggle Styles */
+        #stats-box {
+            display: none;
+        }
+        #stats-box.active {
+            display: block;
+            animation: slideUp 0.4s ease-out;
+        }
+        @keyframes slideUp {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        #stats-arrow {
+            transition: transform 0.3s ease;
+        }
+        .rotate-180 {
+            transform: rotate(180deg);
+        }
+
+        /* Accessibility Styles */
+        .access-grayscale { filter: grayscale(100%) !important; }
+        .access-contrast { filter: invert(1) hue-rotate(180deg) !important; }
+        .access-contrast img, .access-contrast iframe { filter: invert(1) hue-rotate(180deg) !important; }
+        .access-underline a { text-decoration: underline !important; }
+        .access-big-cursor { cursor: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="64" height="64" style="fill:black"><path d="M0 0l20 50 10-20 20-10z"/></svg>'), auto !important; }
+        .access-stop-animations * {
+            transition: none !important;
+            animation: none !important;
+        }
+        
+        #accessibility-modal {
+            display: none;
+        }
+        #accessibility-modal.active {
+            display: block;
+            animation: slideUp 0.4s ease-out;
+        }
+
+        .access-btn-active {
+            background-color: #1d4ed8 !important; /* blue-700 */
+            color: white !important;
+        }
+
+        /* Kerning and Zoom */
+        :root {
+            --access-zoom: 100%;
+            --access-spacing: normal;
+        }
+        body {
+            font-size: var(--access-zoom);
+            letter-spacing: var(--access-spacing);
+        }
+
+        /* Custom Scrollbar for Modal */
+        .modal-scroll::-webkit-scrollbar {
+            width: 4px;
+        }
+        .modal-scroll::-webkit-scrollbar-thumb {
+            background: #cbd5e1;
+            border-radius: 10px;
+        }
+    </style>
+</head>
+<body class="font-sans antialiased text-gray-800 overflow-x-hidden">
+
+    <!-- Navbar -->
+    <nav class="fixed w-full z-50 top-0 transition-all duration-300" id="navbar">
+        <div class="absolute inset-0 bg-black/40 backdrop-blur-sm -z-10"></div>
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-20">
+                <!-- Logo & Brand -->
+                <div class="flex items-center gap-3 cursor-pointer" onclick="window.location.href='index.html'">
+                    <!-- Placeholder Logo -->
+                    <div class="w-12 h-12 bg-white rounded-full flex items-center justify-center p-1 shadow-lg">
+                        <img src="https://lh3.googleusercontent.com/u/0/d/1bW82RmwnfForzqt4GGsGyNCj5GVMvD3s" alt="Logo Desa" class="w-full h-full object-contain">
+                    </div>
+                    <div class="text-white">
+                        <h1 class="text-xl font-bold leading-tight drop-shadow-md">Desa Cimengeunteung</h1>
+                        <p class="text-xs opacity-90">Kecamatan Rangkasbitung | Kabupaten Lebak | Banten</p>
+                    </div>
+                </div>
+
+                <!-- Desktop Menu -->
+                <div class="hidden lg:flex space-x-6 text-white font-medium text-sm drop-shadow-md">
+                    <a href="#" class="nav-link active">Home</a>
+                    <a href="#" class="nav-link">Profil Desa</a>
+                    <a href="dashboard_desa.html" class="nav-link">Infografis</a>
+                    <a href="listing.html" class="nav-link">Listing</a>
+                    <a href="#" class="nav-link">IDM</a>
+                    <a href="#" class="nav-link">Berita</a>
+                    <a href="#" class="nav-link">Belanja</a>
+                    <a href="#" class="nav-link">PPID</a>
+                </div>
+
+                <!-- Mobile menu button -->
+                <div class="lg:hidden flex items-center">
+                    <button class="text-white hover:text-gray-200 focus:outline-none">
+                        <i class="fas fa-bars text-2xl"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section / Slider -->
+    <section id="hero-section" class="relative h-screen w-full bg-cover bg-center flex items-center justify-center" style="background-image: url('https://images.unsplash.com/photo-1555627230-0726ce40499e?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80');">
+        <!-- Overlay Dark Gradient -->
+        <div class="absolute inset-0 bg-gradient-to-b from-black/50 via-black/30 to-black/60"></div>
+
+        <!-- Slider Controls -->
+        <button onclick="prevSlide()" class="absolute left-4 md:left-10 top-1/2 transform -translate-y-1/2 text-white/50 hover:text-white transition text-4xl z-20">
+            <i class="fas fa-chevron-left drop-shadow-lg"></i>
+        </button>
+        <button onclick="nextSlide()" class="absolute right-4 md:right-10 top-1/2 transform -translate-y-1/2 text-white/50 hover:text-white transition text-4xl z-20">
+            <i class="fas fa-chevron-right drop-shadow-lg"></i>
+        </button>
+
+        <!-- Main Content -->
+        <div class="relative z-10 text-center px-4 max-w-4xl mx-auto mt-16 animate-fade-in-up">
+            <h2 class="text-4xl md:text-5xl lg:text-6xl font-bold text-white drop-shadow-lg mb-4 leading-tight">
+                Selamat Datang<br>
+                Website Resmi Desa Cimengeunteung
+            </h2>
+            <p class="text-lg md:text-xl text-gray-200 drop-shadow-md font-medium">
+                Sumber informasi terbaru tentang pemerintahan di Desa Cimengeunteung
+            </p>
+            <div class="mt-8">
+                <a href="dashboard_desa.html" class="inline-block bg-desa-green hover:bg-green-700 text-white font-bold py-3 px-10 rounded-full transition duration-300 shadow-xl transform hover:scale-105">
+                    Lihat Data Desa
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Jelajahi Desa Section -->
+    <section class="py-16 bg-white">
+        <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+            <h2 class="text-3xl md:text-4xl font-bold text-desa-green mb-6">JELAJAHI Desa</h2>
+            <p class="text-lg md:text-xl text-gray-700 leading-relaxed">
+                Melalui website ini Anda dapat menjelajahi segala hal yang terkait dengan Desa.
+                Aspek pemerintahan, penduduk, demografi, potensi Desa, dan juga berita tentang Desa.
+            </p>
+            <!-- Optional: Add a button to explore more -->
+            <!-- <a href="#" class="mt-8 inline-block bg-desa-green hover:bg-green-700 text-white font-bold py-3 px-8 rounded-full transition duration-300">Mulai Jelajahi</a> -->
+        </div>
+    </section>
+
+
+    <!-- Sambutan Kepala Desa Section -->
+    <section class="py-16 bg-gray-50">
+        <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+            <h2 class="text-3xl md:text-4xl font-bold text-gray-900 mb-8">Sambutan Kepala Desa Cimangeunteung</h2>
+            
+            <div class="mb-6">
+                <!-- Ganti URL gambar di bawah dengan foto asli Kepala Desa -->
+                <img src="https://lh3.googleusercontent.com/u/0/d/1XHith9TSLxtrzS0PkoFCKhw0f2-tUtvu" alt="Foto Kepala Desa Uci Sanusi" class="w-32 h-32 rounded-full mx-auto object-cover shadow-lg mb-4">
+                <p class="text-xl font-semibold text-gray-800">UCI SANUSI</p>
+                <p class="text-md text-gray-600">Kepala Desa Cimangeunteung</p>
+            </div>
+
+            <div class="text-left text-gray-700 leading-relaxed space-y-4">
+                <p>Assalamu’alaikum Warahmatullahi Wabarakatuh,</p>
+                <p>Salam Sejahtera bagi kita semua,</p>
+                <p>Puji syukur kita panjatkan ke hadirat Allah SWT, Tuhan Yang Maha Esa, atas limpahan rahmat dan karunia-Nya sehingga website resmi Desa Cimangeunteung ini dapat hadir di tengah-tengah kita semua.</p>
+                <p>Saya, Uci Sanusi, selaku Kepala Desa Cimangeunteung, mengucapkan selamat datang di platform digital resmi desa kami. Kehadiran website ini merupakan langkah nyata kami dalam mewujudkan tata kelola pemerintahan desa yang transparan, akuntabel, dan inovatif di era digitalisasi saat ini.</p>
+                <p>Website ini bukan sekadar media informasi, melainkan jendela bagi dunia untuk melihat potensi, kearifan lokal, serta perkembangan pembangunan yang ada di Desa Cimangeunteung. Kami berkomitmen untuk terus meningkatkan pelayanan publik, mempermudah akses informasi bagi masyarakat, serta mempererat silaturahmi antara pemerintah desa dengan seluruh warga, baik yang menetap di desa maupun yang berada di perantauan.</p>
+                <p>Di sini, Bapak/Ibu dan Saudara sekalian dapat mengakses berbagai data mengenai profil desa, program kerja, transparansi dana desa, hingga potensi ekonomi kreatif dan pariwisata yang sedang kami kembangkan.</p>
+                <p>Kami menyadari bahwa pembangunan desa tidak akan berjalan maksimal tanpa dukungan dan partisipasi aktif dari seluruh elemen masyarakat. Oleh karena itu, kami sangat terbuka terhadap saran, kritik, dan masukan yang membangun demi kemajuan Desa Cimangeunteung yang kita cintai.</p>
+                <p>Mari kita bersama-sama melangkah menuju desa yang lebih mandiri, sejahtera, dan religius. Semoga website ini memberikan manfaat yang seluas-luasnya bagi kita semua.</p>
+                <p>Terima kasih atas kunjungan Anda.</p>
+                <p>Wassalamu’alaikum Warahmatullahi Wabarakatuh.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Peta Desa Section -->
+    <section class="py-16 bg-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-12">
+                <h2 class="text-3xl md:text-4xl font-bold text-gray-900 mb-4">Peta Desa</h2>
+                <p class="text-lg text-gray-600">Menampilkan Peta Desa Dengan Interest Point Desa Cimangeunteung</p>
+            </div>
+
+            <div class="grid grid-cols-1 lg:grid-cols-3 gap-8 items-start">
+                <!-- Map Container -->
+                <div class="lg:col-span-2 rounded-2xl overflow-hidden shadow-xl h-[450px] border border-gray-200">
+                    <iframe
+                        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d15860.677353995834!2d106.27000000000001!3d-6.370000000000001!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2e421098e9b05777%3A0x40157ecbd7b4940!2sCimangeunteung%2C%20Kec.%20Rangkasbitung%2C%20Kabupaten%20Lebak%2C%20Banten!5e0!3m2!1sid!2sid!4v1715420000000!5m2!1sid!2sid"
+                        width="100%"
+                        height="100%"
+                        style="border:0;"
+                        allowfullscreen=""
+                        loading="lazy"
+                        referrerpolicy="no-referrer-when-downgrade">
+                    </iframe>
+                </div>
+
+                <!-- Interest Points -->
+                <div class="bg-gray-50 p-6 rounded-2xl shadow-inner border border-gray-100">
+                    <h3 class="text-xl font-bold text-desa-green mb-6 flex items-center gap-2">
+                        <i class="fas fa-map-marker-alt"></i> Titik Penting (Interest Points)
+                    </h3>
+                    <ul class="space-y-4">
+                        <li>
+                            <a href="listing.html" class="flex items-start gap-3 p-3 bg-white rounded-lg shadow-sm border-l-4 border-desa-green hover:bg-green-50 hover:shadow-md transition-all duration-300 block">
+                                <div class="bg-green-100 text-green-600 p-2 rounded-md">
+                                    <i class="fas fa-landmark"></i>
+                                </div>
+                                <div>
+                                    <p class="font-semibold text-gray-800">Kantor Desa</p>
+                                    <p class="text-xs text-gray-500 italic">Pusat Administrasi & Pelayanan</p>
+                                </div>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="listing.html" class="flex items-start gap-3 p-3 bg-white rounded-lg shadow-sm border-l-4 border-blue-500 hover:bg-blue-50 hover:shadow-md transition-all duration-300 block">
+                                <div class="bg-blue-100 text-blue-600 p-2 rounded-md">
+                                    <i class="fas fa-mosque"></i>
+                                </div>
+                                <div>
+                                    <p class="font-semibold text-gray-800">Sarana Peribadatan</p>
+                                    <p class="text-xs text-gray-500 italic">Masjid & Mushola Desa</p>
+                                </div>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="listing.html" class="flex items-start gap-3 p-3 bg-white rounded-lg shadow-sm border-l-4 border-yellow-500 hover:bg-yellow-50 hover:shadow-md transition-all duration-300 block">
+                                <div class="bg-yellow-100 text-yellow-600 p-2 rounded-md">
+                                    <i class="fas fa-graduation-cap"></i>
+                                </div>
+                                <div>
+                                    <p class="font-semibold text-gray-800">Fasilitas Pendidikan</p>
+                                    <p class="text-xs text-gray-500 italic">SD Negeri & Madrasah</p>
+                                </div>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- SOTK Section -->
+    <section class="py-16 bg-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+            <h2 class="text-3xl md:text-4xl font-bold text-gray-900 mb-2">Aparat Pemerintah Desa</h2>
+            <p class="text-lg text-gray-600 mb-12">Struktur Organisasi dan Tata Kerja Desa Cimangeunteung</p>
+            
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
+                <!-- Kepala Desa -->
+                <div class="bg-gray-50 p-6 rounded-2xl border border-gray-100 shadow-sm hover:shadow-md transition">
+                    <!-- Ganti URL gambar di bawah dengan foto asli Kepala Desa -->
+                    <img src="https://lh3.googleusercontent.com/u/0/d/1XHith9TSLxtrzS0PkoFCKhw0f2-tUtvu" alt="Foto Kepala Desa Jumadi" class="w-24 h-24 rounded-full mx-auto object-cover shadow-lg mb-4">
+                    <h3 class="text-lg font-bold text-gray-800 uppercase leading-tight">UCI SANUSI</h3>
+                    <p class="text-sm text-desa-green font-semibold mt-1">Kepala Desa</p>
+                </div>
+
+                <!-- Sekretaris Desa -->
+                <div class="bg-gray-50 p-6 rounded-2xl border border-gray-100 shadow-sm hover:shadow-md transition">
+                    <!-- Ganti URL gambar di bawah dengan foto asli Sekretaris Desa -->
+                    <img src="https://lh3.googleusercontent.com/u/0/d/1XHith9TSLxtrzS0PkoFCKhw0f2-tUtvu" alt="Foto Sekretaris Desa Jusman" class="w-24 h-24 rounded-full mx-auto object-cover shadow-lg mb-4">
+                    <h3 class="text-lg font-bold text-gray-800 uppercase leading-tight">LINA MARYANA, S.Ap.</h3>
+                    <p class="text-sm text-desa-green font-semibold mt-1">Sekretaris Desa</p>
+                </div>
+
+                <!-- Kaur Keuangan -->
+                <div class="bg-gray-50 p-6 rounded-2xl border border-gray-100 shadow-sm hover:shadow-md transition">
+                    <!-- Ganti URL gambar di bawah dengan foto asli Kaur Keuangan -->
+                    <img src="https://lh3.googleusercontent.com/u/0/d/1XHith9TSLxtrzS0PkoFCKhw0f2-tUtvu" alt="Foto Kaur Keuangan Rina Jayanti" class="w-24 h-24 rounded-full mx-auto object-cover shadow-lg mb-4">
+                    <h3 class="text-lg font-bold text-gray-800 uppercase leading-tight">MARYATI YANUAR, S.Ap.</h3>
+                    <p class="text-sm text-desa-green font-semibold mt-1">Kaur Keuangan</p>
+                </div>
+
+                <!-- Kasi Pelayanan dan Kesejahteraan -->
+                <div class="bg-gray-50 p-6 rounded-2xl border border-gray-100 shadow-sm hover:shadow-md transition">
+                    <!-- Ganti URL gambar di bawah dengan foto asli Kasi Pelayanan dan Kesejahteraan -->
+                    <img src="https://lh3.googleusercontent.com/u/0/d/1XHith9TSLxtrzS0PkoFCKhw0f2-tUtvu" alt="Foto Kasi Pelayanan dan Kesejahteraan Marliana" class="w-24 h-24 rounded-full mx-auto object-cover shadow-lg mb-4">
+                    <h3 class="text-lg font-bold text-gray-800 uppercase leading-tight">ELY SOLIHAT, S.Pd.</h3>
+                    <p class="text-sm text-desa-green font-semibold mt-1">Kepala Seksi Pelayanan dan Kesejahteraan</p>
+                </div>
+
+                <!-- Kaur Umum dan Perencanaan -->
+                <div class="bg-gray-50 p-6 rounded-2xl border border-gray-100 shadow-sm hover:shadow-md transition">
+                    <!-- Ganti URL gambar di bawah dengan foto asli Kaur Umum dan Perencanaan -->
+                    <img src="https://lh3.googleusercontent.com/u/0/d/1XHith9TSLxtrzS0PkoFCKhw0f2-tUtvu" alt="Foto Kaur Umum dan Perencanaan Alfiah Ramadhani Ampat" class="w-24 h-24 rounded-full mx-auto object-cover shadow-lg mb-4">
+                    <h3 class="text-lg font-bold text-gray-800 uppercase leading-tight">RINI RAHMAWATI, S.Pd.</h3>
+                    <p class="text-sm text-desa-green font-semibold mt-1">Kaur Umum dan Perencanaan</p>
+                </div>
+
+                <!-- Kasi Pemerintahan -->
+                <div class="bg-gray-50 p-6 rounded-2xl border border-gray-100 shadow-sm hover:shadow-md transition">
+                    <!-- Ganti URL gambar di bawah dengan foto asli Kasi Pemerintahan -->
+                    <img src="https://lh3.googleusercontent.com/u/0/d/1XHith9TSLxtrzS0PkoFCKhw0f2-tUtvu" alt="Foto Kasi Pemerintahan Safitriyani" class="w-24 h-24 rounded-full mx-auto object-cover shadow-lg mb-4">
+                    <h3 class="text-lg font-bold text-gray-800 uppercase leading-tight">NUNUNG NURHASANAH, S.Sos.</h3>
+                    <p class="text-sm text-desa-green font-semibold mt-1">Kasi Pemerintahan</p>
+                </div>
+
+                <!-- Staf Kaur Keuangan -->
+                <div class="bg-gray-50 p-6 rounded-2xl border border-gray-100 shadow-sm hover:shadow-md transition">
+                    <!-- Ganti URL gambar di bawah dengan foto asli Staf Kaur Keuangan -->
+                    <img src="https://lh3.googleusercontent.com/u/0/d/1XHith9TSLxtrzS0PkoFCKhw0f2-tUtvu" alt="Foto Staf Kaur Keuangan Nurul Hidayah" class="w-24 h-24 rounded-full mx-auto object-cover shadow-lg mb-4">
+                    <h3 class="text-lg font-bold text-gray-800 uppercase leading-tight">NURUL HIDAYAH</h3>
+                    <p class="text-sm text-desa-green font-semibold mt-1">Staf Kaur Keuangan</p>
+                </div>
+
+                <!-- Staf Kaur Umum dan Perencanaan 1 -->
+                <div class="bg-gray-50 p-6 rounded-2xl border border-gray-100 shadow-sm hover:shadow-md transition">
+                    <!-- Ganti URL gambar di bawah dengan foto asli Staf Kaur Umum dan Perencanaan -->
+                    <img src="https://lh3.googleusercontent.com/u/0/d/1XHith9TSLxtrzS0PkoFCKhw0f2-tUtvu" alt="Foto Staf Kaur Umum dan Perencanaan Yuliani" class="w-24 h-24 rounded-full mx-auto object-cover shadow-lg mb-4">
+                    <h3 class="text-lg font-bold text-gray-800 uppercase leading-tight">YULIANI</h3>
+                    <p class="text-sm text-desa-green font-semibold mt-1">Staf Kaur Umum dan Perencanaan</p>
+                </div>
+
+                <!-- Staf Kaur Umum dan Perencanaan 2 -->
+                <div class="bg-gray-50 p-6 rounded-2xl border border-gray-100 shadow-sm hover:shadow-md transition">
+                    <!-- Ganti URL gambar di bawah dengan foto asli Staf Kaur Umum dan Perencanaan -->
+                    <img src="https://lh3.googleusercontent.com/u/0/d/1XHith9TSLxtrzS0PkoFCKhw0f2-tUtvu" alt="Foto Staf Kaur Umum dan Perencanaan Yayan Traveri" class="w-24 h-24 rounded-full mx-auto object-cover shadow-lg mb-4">
+                    <h3 class="text-lg font-bold text-gray-800 uppercase leading-tight">YAYAN TRAVERI</h3>
+                    <p class="text-sm text-desa-green font-semibold mt-1">Staf Kaur Umum dan Perencanaan</p>
+                </div>
+
+                <!-- Staf Kasi Pemerintahan -->
+                <div class="bg-gray-50 p-6 rounded-2xl border border-gray-100 shadow-sm hover:shadow-md transition">
+                    <!-- Ganti URL gambar di bawah dengan foto asli Staf Kasi Pemerintahan -->
+                    <img src="https://lh3.googleusercontent.com/u/0/d/1XHith9TSLxtrzS0PkoFCKhw0f2-tUtvu" alt="Foto Staf Kasi Pemerintahan Muhammad Asyir" class="w-24 h-24 rounded-full mx-auto object-cover shadow-lg mb-4">
+                    <h3 class="text-lg font-bold text-gray-800 uppercase leading-tight">MUHAMMAD ASYIR</h3>
+                    <p class="text-sm text-desa-green font-semibold mt-1">Staf Kasi Pemerintahan</p>
+                </div>
+
+                <!-- Staf Kasi Pelayanan dan Kesejahteraan 1 -->
+                <div class="bg-gray-50 p-6 rounded-2xl border border-gray-100 shadow-sm hover:shadow-md transition">
+                    <!-- Ganti URL gambar di bawah dengan foto asli Staf Kasi Pelayanan dan Kesejahteraan -->
+                    <img src="https://lh3.googleusercontent.com/u/0/d/1XHith9TSLxtrzS0PkoFCKhw0f2-tUtvu" alt="Foto Staf Kasi Pelayanan dan Kesejahteraan Jaenab" class="w-24 h-24 rounded-full mx-auto object-cover shadow-lg mb-4">
+                    <h3 class="text-lg font-bold text-gray-800 uppercase leading-tight">JAENAB</h3>
+                    <p class="text-sm text-desa-green font-semibold mt-1">Staf Kasi Pelayanan dan kesejahteraan</p>
+                </div>
+
+                <!-- Staf Kasi Pelayanan dan Kesejahteraan 2 -->
+                <div class="bg-gray-50 p-6 rounded-2xl border border-gray-100 shadow-sm hover:shadow-md transition">
+                    <!-- Ganti URL gambar di bawah dengan foto asli Staf Kasi Pelayanan dan Kesejahteraan -->
+                    <img src="https://lh3.googleusercontent.com/u/0/d/1XHith9TSLxtrzS0PkoFCKhw0f2-tUtvu" alt="Foto Staf Kasi Pelayanan dan Kesejahteraan Nurmala Sari" class="w-24 h-24 rounded-full mx-auto object-cover shadow-lg mb-4">
+                    <h3 class="text-lg font-bold text-gray-800 uppercase leading-tight">NURMALA SARI</h3>
+                    <p class="text-sm text-desa-green font-semibold mt-1">Staf Kasi Pelayanan dan Kesejahteraan</p>
+                </div>
+
+                <!-- Kepala Dusun Empang -->
+                <div class="bg-gray-50 p-6 rounded-2xl border border-gray-100 shadow-sm hover:shadow-md transition">
+                    <!-- Ganti URL gambar di bawah dengan foto asli Kepala Dusun Empang -->
+                    <img src="https://lh3.googleusercontent.com/u/0/d/1XHith9TSLxtrzS0PkoFCKhw0f2-tUtvu" alt="Foto Kepala Dusun Empang Muh Amin M" class="w-24 h-24 rounded-full mx-auto object-cover shadow-lg mb-4">
+                    <h3 class="text-lg font-bold text-gray-800 uppercase leading-tight">MUH AMIN M</h3>
+                    <p class="text-sm text-desa-green font-semibold mt-1">Kepala Dusun Empang</p>
+                </div>
+
+                <!-- Kepala Dusun Padaelo -->
+                <div class="bg-gray-50 p-6 rounded-2xl border border-gray-100 shadow-sm hover:shadow-md transition">
+                    <!-- Ganti URL gambar di bawah dengan foto asli Kepala Dusun Padaelo -->
+                    <img src="https://lh3.googleusercontent.com/u/0/d/1XHith9TSLxtrzS0PkoFCKhw0f2-tUtvu" alt="Foto Kepala Dusun Padaelo Sumarlin" class="w-24 h-24 rounded-full mx-auto object-cover shadow-lg mb-4">
+                    <h3 class="text-lg font-bold text-gray-800 uppercase leading-tight">SUMARLIN, A.Md.</h3>
+                    <p class="text-sm text-desa-green font-semibold mt-1">Kepala Dusun Padaelo</p>
+                </div>
+            </div>
+
+            <!-- Link Lihat Struktur Lengkap -->
+            <div class="mt-12">
+                <a href="#" class="inline-flex items-center gap-2 px-6 py-3 bg-white border-2 border-desa-green text-desa-green font-bold rounded-full hover:bg-desa-green hover:text-white transition duration-300">
+                    Lihat Struktur Lebih lengkap
+                    <i class="fas fa-arrow-right"></i>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Administrasi Penduduk Section -->
+    <section class="py-16 bg-gray-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-12">
+                <h2 class="text-3xl md:text-4xl font-bold text-gray-900 mb-4">Administrasi Penduduk</h2>
+                <p class="text-lg text-gray-600 max-w-3xl mx-auto leading-relaxed">
+                    Sistem digital yang berfungsi mempermudah pengelolaan data dan informasi terkait dengan kependudukan dan pendayagunaannya untuk pelayanan publik yang efektif dan efisien
+                </p>
+            </div>
+
+            <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-6">
+                <!-- Total Penduduk -->
+                <div class="bg-white p-6 rounded-2xl shadow-sm border border-gray-100 text-center hover:shadow-md transition transform hover:-translate-y-1">
+                    <div class="text-desa-green text-3xl mb-3">
+                        <i class="fas fa-users"></i>
+                    </div>
+                    <p class="text-2xl font-bold text-gray-900 leading-none">1.158</p>
+                    <p class="text-sm text-gray-500 mt-2 font-medium uppercase tracking-wider">Penduduk</p>
+                </div>
+                <!-- Laki-Laki -->
+                <div class="bg-white p-6 rounded-2xl shadow-sm border border-gray-100 text-center hover:shadow-md transition transform hover:-translate-y-1">
+                    <div class="text-blue-600 text-3xl mb-3">
+                        <i class="fas fa-mars"></i>
+                    </div>
+                    <p class="text-2xl font-bold text-gray-900 leading-none">606</p>
+                    <p class="text-sm text-gray-500 mt-2 font-medium uppercase tracking-wider">Laki-Laki</p>
+                </div>
+                <!-- Perempuan -->
+                <div class="bg-white p-6 rounded-2xl shadow-sm border border-gray-100 text-center hover:shadow-md transition transform hover:-translate-y-1">
+                    <div class="text-pink-500 text-3xl mb-3">
+                        <i class="fas fa-venus"></i>
+                    </div>
+                    <p class="text-2xl font-bold text-gray-900 leading-none">552</p>
+                    <p class="text-sm text-gray-500 mt-2 font-medium uppercase tracking-wider">Perempuan</p>
+                </div>
+                <!-- Kepala Keluarga -->
+                <div class="bg-white p-6 rounded-2xl shadow-sm border border-gray-100 text-center hover:shadow-md transition transform hover:-translate-y-1">
+                    <div class="text-orange-500 text-3xl mb-3">
+                        <i class="fas fa-home"></i>
+                    </div>
+                    <p class="text-2xl font-bold text-gray-900 leading-none">308</p>
+                    <p class="text-sm text-gray-500 mt-2 font-medium uppercase tracking-wider">Kepala Keluarga</p>
+                </div>
+                <!-- Penduduk Sementara -->
+                <div class="bg-white p-6 rounded-2xl shadow-sm border border-gray-100 text-center hover:shadow-md transition transform hover:-translate-y-1">
+                    <div class="text-purple-600 text-3xl mb-3">
+                        <i class="fas fa-user-clock"></i>
+                    </div>
+                    <p class="text-2xl font-bold text-gray-900 leading-none">107</p>
+                    <p class="text-sm text-gray-500 mt-2 font-medium uppercase tracking-wider">Penduduk Sementara</p>
+                </div>
+                <!-- Mutasi Penduduk -->
+                <div class="bg-white p-6 rounded-2xl shadow-sm border border-gray-100 text-center hover:shadow-md transition transform hover:-translate-y-1">
+                    <div class="text-red-500 text-3xl mb-3">
+                        <i class="fas fa-exchange-alt"></i>
+                    </div>
+                    <p class="text-2xl font-bold text-gray-900 leading-none">50</p>
+                    <p class="text-sm text-gray-500 mt-2 font-medium uppercase tracking-wider">Mutasi Penduduk</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- APB Desa Section -->
+    <section class="py-16 bg-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-12">
+                <h2 class="text-3xl md:text-4xl font-bold text-gray-900 mb-4">APB Desa 2025</h2>
+                <p class="text-lg text-gray-600 max-w-3xl mx-auto leading-relaxed">
+                    Akses cepat dan transparan terhadap APB Desa serta proyek pembangunan
+                </p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8 justify-center">
+                <!-- Pendapatan Desa -->
+                <div class="bg-gray-50 p-8 rounded-2xl shadow-md border border-gray-100 text-center hover:shadow-lg transition transform hover:-translate-y-1">
+                    <div class="text-desa-green text-4xl mb-4">
+                        <i class="fas fa-money-bill-wave"></i>
+                    </div>
+                    <p class="text-sm text-gray-500 font-medium uppercase tracking-wider">Pendapatan Desa</p>
+                    <p class="text-3xl font-bold text-gray-900 mt-2 leading-tight">Rp4.254.715.300</p>
+                </div>
+
+                <!-- Belanja Desa -->
+                <div class="bg-gray-50 p-8 rounded-2xl shadow-md border border-gray-100 text-center hover:shadow-lg transition transform hover:-translate-y-1">
+                    <div class="text-red-500 text-4xl mb-4">
+                        <i class="fas fa-money-check-alt"></i>
+                    </div>
+                    <p class="text-sm text-gray-500 font-medium uppercase tracking-wider">Belanja Desa</p>
+                    <p class="text-3xl font-bold text-gray-900 mt-2 leading-tight">Rp4.235.654.388</p>
+                </div>
+            </div>
+
+            <!-- Link Lihat Data Lebih Lengkap -->
+            <div class="mt-12 text-center">
+                <a href="#" class="inline-flex items-center gap-2 px-8 py-3 bg-desa-green text-white font-bold rounded-full hover:bg-green-700 transition duration-300 shadow-lg">
+                    Lihat data lebih lengkap
+                    <i class="fas fa-arrow-right"></i>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Berita Desa Section -->
+    <section class="py-16 bg-gray-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-12">
+                <h2 class="text-3xl md:text-4xl font-bold text-gray-900 mb-4">Berita Desa</h2>
+                <p class="text-lg text-gray-600 max-w-3xl mx-auto leading-relaxed">
+                    Menyajikan informasi terbaru tentang peristiwa, berita terkini, dan artikel-artikel jurnalistik dari Desa Cimangeunteung
+                </p>
+            </div>
+
+            <!-- News Grid -->
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <!-- News Card 1 -->
+                <div class="bg-white rounded-2xl overflow-hidden shadow-sm hover:shadow-lg transition-shadow border border-gray-100 flex flex-col">
+                    <img src="https://images.unsplash.com/photo-1517457373958-b7bdd4587205?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Berita 1" class="w-full h-48 object-cover">
+                    <div class="p-6 flex-grow">
+                        <div class="flex items-center gap-2 text-xs text-desa-green font-semibold mb-3 uppercase tracking-wider">
+                            <span class="bg-green-100 px-2 py-1 rounded">Pemerintahan</span>
+                            <span class="text-gray-400">•</span>
+                            <span class="text-gray-500">10 Mei 2024</span>
+                        </div>
+                        <h3 class="text-xl font-bold text-gray-900 mb-3 hover:text-desa-green transition-colors cursor-pointer">
+                            Rapat Koordinasi Persiapan HUT RI Ke-79 Desa
+                        </h3>
+                        <p class="text-gray-600 text-sm line-clamp-3 mb-4">
+                            Pemerintah Desa menggelar rapat koordinasi bersama tokoh masyarakat dan pemuda untuk mempersiapkan perayaan hari kemerdekaan...
+                        </p>
+                    </div>
+                    <div class="px-6 pb-6 mt-auto">
+                        <a href="#" class="text-desa-green font-bold text-sm flex items-center gap-2 group">
+                            Selengkapnya <i class="fas fa-arrow-right group-hover:translate-x-1 transition-transform"></i>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- News Card 2 -->
+                <div class="bg-white rounded-2xl overflow-hidden shadow-sm hover:shadow-lg transition-shadow border border-gray-100 flex flex-col">
+                    <img src="https://images.unsplash.com/photo-1542601906990-b4d3fb773b09?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Berita 2" class="w-full h-48 object-cover">
+                    <div class="p-6 flex-grow">
+                        <div class="flex items-center gap-2 text-xs text-desa-green font-semibold mb-3 uppercase tracking-wider">
+                            <span class="bg-green-100 px-2 py-1 rounded">Lingkungan</span>
+                            <span class="text-gray-400">•</span>
+                            <span class="text-gray-500">08 Mei 2024</span>
+                        </div>
+                        <h3 class="text-xl font-bold text-gray-900 mb-3 hover:text-desa-green transition-colors cursor-pointer">
+                            Aksi Kerja Bakti Bersihkan Saluran Irigasi Sawah
+                        </h3>
+                        <p class="text-gray-600 text-sm line-clamp-3 mb-4">
+                            Warga secara antusias mengikuti kegiatan kerja bakti membersihkan saluran irigasi guna memperlancar aliran air menuju lahan pertanian...
+                        </p>
+                    </div>
+                    <div class="px-6 pb-6 mt-auto">
+                        <a href="#" class="text-desa-green font-bold text-sm flex items-center gap-2 group">
+                            Selengkapnya <i class="fas fa-arrow-right group-hover:translate-x-1 transition-transform"></i>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- News Card 3 -->
+                <div class="bg-white rounded-2xl overflow-hidden shadow-sm hover:shadow-lg transition-shadow border border-gray-100 flex flex-col">
+                    <img src="https://images.unsplash.com/photo-1531206715517-5c0ba140b2b8?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Berita 3" class="w-full h-48 object-cover">
+                    <div class="p-6 flex-grow">
+                        <div class="flex items-center gap-2 text-xs text-desa-green font-semibold mb-3 uppercase tracking-wider">
+                            <span class="bg-green-100 px-2 py-1 rounded">Kesehatan</span>
+                            <span class="text-gray-400">•</span>
+                            <span class="text-gray-500">05 Mei 2024</span>
+                        </div>
+                        <h3 class="text-xl font-bold text-gray-900 mb-3 hover:text-desa-green transition-colors cursor-pointer">
+                            Posyandu Balita dan Lansia Rutin Bulan Mei
+                        </h3>
+                        <p class="text-gray-600 text-sm line-clamp-3 mb-4">
+                            Kegiatan rutin Posyandu kembali dilaksanakan untuk memantau kesehatan balita serta lansia di lingkungan desa secara berkala...
+                        </p>
+                    </div>
+                    <div class="px-6 pb-6 mt-auto">
+                        <a href="#" class="text-desa-green font-bold text-sm flex items-center gap-2 group">
+                            Selengkapnya <i class="fas fa-arrow-right group-hover:translate-x-1 transition-transform"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Link Lihat Berita Lebih Banyak -->
+            <div class="mt-12 text-center">
+                <a href="#" class="inline-flex items-center gap-2 px-8 py-3 bg-desa-green text-white font-bold rounded-full hover:bg-green-700 transition duration-300 shadow-lg">
+                    Lihat berita lebih banyak
+                    <i class="fas fa-arrow-right"></i>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Potensi Desa Section -->
+    <section class="py-16 bg-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-12">
+                <h2 class="text-3xl md:text-4xl font-bold text-gray-900 mb-4">POTENSI Desa</h2>
+                <p class="text-lg text-gray-600 max-w-3xl mx-auto leading-relaxed">
+                    Informasi tentang potensi dan kemajuan Desa di berbagai bidang seperti ekonomi, pariwisata, pertanian, industri kreatif, dan kelestarian lingkungan
+                </p>
+            </div>
+
+            <!-- Placeholder for Potensi Cards (can be expanded later) -->
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <!-- Example Potensi Card (can be duplicated and customized) -->
+                <div class="bg-gray-50 p-6 rounded-2xl shadow-sm border border-gray-100 text-center hover:shadow-md transition transform hover:-translate-y-1">
+                    <div class="text-desa-green text-4xl mb-4"><i class="fas fa-leaf"></i></div>
+                    <h3 class="text-xl font-bold text-gray-800 mb-2">Pertanian Unggulan</h3>
+                    <p class="text-gray-600 text-sm">Deskripsi singkat potensi pertanian di desa, misalnya komoditas unggulan atau inovasi.</p>
+                </div>
+                <div class="bg-gray-50 p-6 rounded-2xl shadow-sm border border-gray-100 text-center hover:shadow-md transition transform hover:-translate-y-1">
+                    <div class="text-blue-500 text-4xl mb-4"><i class="fas fa-camera-retro"></i></div>
+                    <h3 class="text-xl font-bold text-gray-800 mb-2">Destinasi Wisata Alam</h3>
+                    <p class="text-gray-600 text-sm">Informasi tentang daya tarik wisata alam seperti air terjun, bukit, atau pemandangan indah.</p>
+                </div>
+                <div class="bg-gray-50 p-6 rounded-2xl shadow-sm border border-gray-100 text-center hover:shadow-md transition transform hover:-translate-y-1">
+                    <div class="text-purple-500 text-4xl mb-4"><i class="fas fa-lightbulb"></i></div>
+                    <h3 class="text-xl font-bold text-gray-800 mb-2">Industri Kreatif Lokal</h3>
+                    <p class="text-gray-600 text-sm">Mengenalkan produk kerajinan tangan, kuliner khas, atau seni budaya yang berkembang.</p>
+                </div>
+            </div>
+
+            <!-- Link Lihat Potensi Lebih Banyak -->
+            <div class="mt-12 text-center">
+                <a href="#" class="inline-flex items-center gap-2 px-8 py-3 bg-desa-green text-white font-bold rounded-full hover:bg-green-700 transition duration-300 shadow-lg">
+                    Lihat potensi lebih banyak
+                    <i class="fas fa-arrow-right"></i>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Wisata Desa Section -->
+    <section class="py-16 bg-gray-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-12">
+                <h2 class="text-3xl md:text-4xl font-bold text-gray-900 mb-4">WISATA Desa</h2>
+                <p class="text-lg text-gray-600 max-w-3xl mx-auto leading-relaxed">
+                    Layanan yang mempermudah promosi wisata Desa sehingga dapat menarik pengunjung Desa
+                </p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <!-- Wisata Card 1 -->
+                <div class="bg-white rounded-2xl overflow-hidden shadow-sm hover:shadow-lg transition-shadow border border-gray-100 flex flex-col">
+                    <img src="https://images.unsplash.com/photo-1507525428034-b723cf961d3e?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Pantai Biru Cimangeunteung" class="w-full h-48 object-cover">
+                    <div class="p-6 flex-grow">
+                        <h3 class="text-xl font-bold text-gray-900 mb-3 hover:text-desa-green transition-colors cursor-pointer">
+                            Pantai Biru Cimangeunteung
+                        </h3>
+                        <p class="text-gray-600 text-sm line-clamp-3 mb-4">
+                            Pantai ini terbuka untuk umum dan siapa saja boleh mengunjunginya, pengunjung atau wisatawan akan disambut baik oleh penduduk lokal daerah wisata...
+                        </p>
+                    </div>
+                    <div class="px-6 pb-6 mt-auto">
+                        <a href="#" class="text-desa-green font-bold text-sm flex items-center gap-2 group">
+                            Selengkapnya <i class="fas fa-arrow-right group-hover:translate-x-1 transition-transform"></i>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Anda bisa menambahkan kartu wisata lainnya di sini dengan struktur yang sama -->
+            </div>
+
+            <!-- Link Lihat Wisata Lebih Banyak -->
+            <div class="mt-12 text-center">
+                <a href="#" class="inline-flex items-center gap-2 px-8 py-3 bg-desa-green text-white font-bold rounded-full hover:bg-green-700 transition duration-300 shadow-lg">
+                    Lihat wisata lebih banyak
+                    <i class="fas fa-arrow-right"></i>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Galeri Desa Section -->
+    <section class="py-16 bg-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-12">
+                <h2 class="text-3xl md:text-4xl font-bold text-gray-900 mb-4">GALERI Desa</h2>
+                <p class="text-lg text-gray-600 max-w-3xl mx-auto leading-relaxed">
+                    Menampilkan kegiatan-kegiatan yang berlangsung di Desa Cimangeunteung
+                </p>
+            </div>
+
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+                <!-- Galeri Item -->
+                <div class="rounded-xl overflow-hidden shadow-md hover:shadow-xl transition duration-300 group cursor-pointer">
+                    <img src="https://images.unsplash.com/photo-1507525428034-b723cf961d3e?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Pantai Biru Cimangeunteung" class="w-full h-48 object-cover group-hover:scale-110 transition duration-500">
+                </div>
+                <div class="rounded-xl overflow-hidden shadow-md hover:shadow-xl transition duration-300 group cursor-pointer">
+                    <img src="https://images.unsplash.com/photo-1507525428034-b723cf961d3e?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Pantai Biru Cimangeunteung" class="w-full h-48 object-cover group-hover:scale-110 transition duration-500">
+                </div>
+                <div class="rounded-xl overflow-hidden shadow-md hover:shadow-xl transition duration-300 group cursor-pointer">
+                    <img src="https://images.unsplash.com/photo-1507525428034-b723cf961d3e?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Pantai Biru Cimangeunteung" class="w-full h-48 object-cover group-hover:scale-110 transition duration-500">
+                </div>
+                <div class="rounded-xl overflow-hidden shadow-md hover:shadow-xl transition duration-300 group cursor-pointer">
+                    <img src="https://images.unsplash.com/photo-1507525428034-b723cf961d3e?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Pantai Biru Cimangeunteung" class="w-full h-48 object-cover group-hover:scale-110 transition duration-500">
+                </div>
+            </div>
+
+            <div class="mt-12 text-center">
+                <a href="#" class="inline-flex items-center gap-2 px-8 py-3 bg-desa-green text-white font-bold rounded-full hover:bg-green-700 transition duration-300 shadow-lg">
+                    Lihat foto lebih banyak
+                    <i class="fas fa-arrow-right"></i>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-desa-green text-white py-16">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12">
+                <!-- Informasi Desa -->
+                <div>
+                    <div class="flex items-center gap-4 mb-6">
+                        <div class="w-16 h-16 bg-white p-2 rounded-xl shadow-md shrink-0">
+                            <img src="https://lh3.googleusercontent.com/u/0/d/1bW82RmwnfForzqt4GGsGyNCj5GVMvD3s" alt="Logo Pemkab Lebak" class="w-full h-full object-contain">
+                        </div>
+                        <h3 class="text-xl font-bold border-b-2 border-white/20 pb-2 flex-grow">Pemerintah Desa Cimangeunteung</h3>
+                    </div>
+                    <div class="space-y-2 text-sm opacity-90 leading-relaxed">
+                        <p>Jl. Raya Cipanas KM 7 Kp. Ciparada<br>RT 007 RW 002</p>
+                        <p>Desa Cimangeunteung, Kecamatan Rangkasbitung, Kabupaten Lebak</p>
+                        <p>Provinsi Banten, 42312</p>
+                        <p class="pt-4 font-semibold">Kode Wilayah: 36.02.01.2016</p>
+                    </div>
+                </div>
+
+                <!-- Hubungi Kami -->
+                <div>
+                    <h3 class="text-xl font-bold mb-6 border-b-2 border-white/20 pb-2 inline-block">Hubungi Kami</h3>
+                    <ul class="space-y-4 text-sm">
+                        <li class="flex items-center gap-3">
+                            <i class="fas fa-phone-alt text-green-300"></i>
+                            <span>082150208664</span>
+                        </li>
+                        <li class="flex items-center gap-3">
+                            <i class="fas fa-envelope text-green-300"></i>
+                            <span>desa.cimangeunteung@lebakkab.go.id</span>
+                        </li>
+                    </ul>
+                    <!-- Sosial Media -->
+                    <div class="mt-6 flex gap-4 text-xl">
+                        <a href="https://facebook.com/username_desa" target="_blank" rel="noopener noreferrer" class="text-white hover:text-green-300 transition" title="Facebook"><i class="fab fa-facebook"></i></a>
+                        <a href="https://instagram.com/username_desa" target="_blank" rel="noopener noreferrer" class="text-white hover:text-green-300 transition" title="Instagram"><i class="fab fa-instagram"></i></a>
+                        <a href="https://twitter.com/username_desa" target="_blank" rel="noopener noreferrer" class="text-white hover:text-green-300 transition" title="X (Twitter)"><i class="fab fa-x-twitter"></i></a>
+                        <a href="https://youtube.com/c/channel_desa" target="_blank" rel="noopener noreferrer" class="text-white hover:text-green-300 transition" title="YouTube"><i class="fab fa-youtube"></i></a>
+                        <a href="https://tiktok.com/@username_desa" target="_blank" rel="noopener noreferrer" class="text-white hover:text-green-300 transition" title="TikTok"><i class="fab fa-tiktok"></i></a>
+                    </div>
+                </div>
+
+                <!-- Nomor Telepon Penting -->
+                <div>
+                    <h3 class="text-xl font-bold mb-6 border-b-2 border-white/20 pb-2 inline-block">Nomor Telepon Penting</h3>
+                    <ul class="space-y-4 text-sm">
+                        <li class="flex items-center gap-3">
+                            <i class="fas fa-user-shield text-green-300"></i>
+                            <span>Uci Sanusi / Kades Cimangeunteung</span>
+                        </li>
+                        <li class="flex items-center gap-3">
+                            <i class="fas fa-ambulance text-green-300"></i>
+                            <span>Yayan / Ambulan Cimangeunteung</span>
+                        </li>
+                    </ul>
+                </div>
+
+                <!-- Jelajahi -->
+                <div>
+                    <h3 class="text-xl font-bold mb-6 border-b-2 border-white/20 pb-2 inline-block">Jelajahi</h3>
+                    <ul class="space-y-3 text-sm">
+                        <li><a href="https://kemendesa.go.id" target="_blank" class="hover:text-green-300 transition flex items-center gap-2"><i class="fas fa-external-link-alt text-[10px]"></i> Website Kemendesa</a></li>
+                        <li><a href="https://kemendagri.go.id" target="_blank" class="hover:text-green-300 transition flex items-center gap-2"><i class="fas fa-external-link-alt text-[10px]"></i> Website Kemendagri</a></li>
+                        <li><a href="https://lebakkab.go.id" target="_blank" class="hover:text-green-300 transition flex items-center gap-2"><i class="fas fa-external-link-alt text-[10px]"></i> Website Kabupaten Lebak</a></li>
+                        <li><a href="https://cekdptonline.kpu.go.id" target="_blank" class="hover:text-green-300 transition flex items-center gap-2"><i class="fas fa-external-link-alt text-[10px]"></i> Cek DPT Online</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="mt-16 pt-8 border-t border-white/10 text-center text-xs opacity-60">
+                <p>© 2026 Powered by PT Digital Desa Indonesia</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Floating Widgets -->
+    <!-- Visitor Counter (Bottom Left) -->
+    <div class="fixed bottom-6 left-6 z-40 flex flex-col items-start gap-4">
+        <!-- Statistik Card Popup -->
+        <div id="stats-box" style="background-color: #4a4a4a;" class="w-72 rounded-3xl shadow-2xl border border-gray-600 overflow-hidden text-white hidden">
+            <!-- Header -->
+            <div class="p-5 border-b border-gray-600">
+                <div class="flex items-center gap-3">
+                    <div class="bg-green-500/20 p-2 rounded-xl text-green-400">
+                        <i class="fas fa-users text-lg"></i>
+                    </div>
+                    <div>
+                        <h4 class="text-sm font-bold tracking-tight">Statistik Pengunjung</h4>
+                        <p class="text-[10px] text-gray-400">11 Mei, 21.39</p>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Data List -->
+            <div class="p-5 space-y-3">
+                <div class="flex justify-between text-xs pb-2 border-b border-gray-600/50">
+                    <span class="opacity-80">Hari Ini</span>
+                    <span class="font-bold">530</span>
+                </div>
+                <div class="flex justify-between text-xs pb-2 border-b border-gray-600/50">
+                    <span class="opacity-80">Kemarin</span>
+                    <span class="font-bold">371</span>
+                </div>
+                <div class="flex justify-between text-xs pb-2 border-b border-gray-600/50">
+                    <span class="opacity-80">Minggu Ini</span>
+                    <span class="font-bold">901</span>
+                </div>
+                <div class="flex justify-between text-xs pb-2 border-b border-gray-600/50">
+                    <span class="opacity-80">Bulan Ini</span>
+                    <span class="font-bold">7.048</span>
+                </div>
+            </div>
+
+            <!-- Footer Summary -->
+            <div class="bg-green-100 p-4 text-green-900 flex flex-col">
+                <span class="text-[8px] font-bold uppercase tracking-widest opacity-70">Total Kunjungan</span>
+                <span class="text-2xl font-black tracking-tighter">507.986</span>
+            </div>
+        </div>
+
+        <!-- Trigger Button -->
+        <button onclick="toggleStats()" class="bg-green-100/90 backdrop-blur-md border border-green-200 rounded-2xl p-3 shadow-lg flex items-center gap-3 cursor-pointer hover:bg-green-200 transition-all duration-300 group">
+            <div class="bg-green-600 text-white w-10 h-10 rounded-xl flex items-center justify-center shadow-md group-hover:scale-110 transition">
+                <i class="fas fa-chart-bar"></i>
+            </div>
+            <div class="text-left pr-2">
+                <p class="text-[10px] text-green-800 font-bold uppercase tracking-wider leading-none mb-1">Kunjungan</p>
+                <p class="text-base font-black text-green-900 leading-none">530 <span class="text-[10px] font-medium opacity-60">Hari Ini</span></p>
+            </div>
+            <div id="stats-arrow" class="text-green-600 ml-1 transition-transform duration-300">
+                <i class="fas fa-chevron-up"></i>
+            </div>
+        </button>
+    </div>
+
+    <!-- Action Buttons (Bottom Right) -->
+    <div class="fixed bottom-6 right-6 z-40 flex flex-col items-end gap-4">
+        <!-- Accessibility Menu Modal -->
+        <div id="accessibility-modal" class="w-72 bg-white rounded-3xl shadow-2xl border border-gray-100 overflow-hidden hidden">
+            <div class="bg-blue-700 p-4 text-white flex justify-between items-center">
+                <h4 class="font-bold flex items-center gap-2">
+                    <i class="fas fa-universal-access"></i> Menu Aksesibilitas
+                </h4>
+                <button type="button" onclick="toggleAccessibility()" class="hover:rotate-90 transition-transform">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            <div class="p-4 grid grid-cols-1 gap-2 modal-scroll max-h-[70vh] overflow-y-auto">
+                <!-- Text Zoom -->
+                <div class="flex items-center justify-between p-2 bg-gray-50 rounded-xl">
+                    <span class="text-xs font-bold text-gray-600 uppercase">Ukuran Teks</span>
+                    <div class="flex gap-1">
+                        <button onclick="updateZoom(-10)" class="w-8 h-8 flex items-center justify-center bg-white border border-gray-200 rounded-lg hover:bg-gray-100"><i class="fas fa-minus text-[10px]"></i></button>
+                        <button onclick="updateZoom(10)" class="w-8 h-8 flex items-center justify-center bg-white border border-gray-200 rounded-lg hover:bg-gray-100"><i class="fas fa-plus text-[10px]"></i></button>
+                    </div>
+                </div>
+                <!-- Kerning -->
+                <div class="flex items-center justify-between p-2 bg-gray-50 rounded-xl">
+                    <span class="text-xs font-bold text-gray-600 uppercase">Jarak Teks</span>
+                    <div class="flex gap-1">
+                        <button onclick="updateSpacing(-0.5)" class="w-8 h-8 flex items-center justify-center bg-white border border-gray-200 rounded-lg hover:bg-gray-100"><i class="fas fa-minus text-[10px]"></i></button>
+                        <button onclick="updateSpacing(0.5)" class="w-8 h-8 flex items-center justify-center bg-white border border-gray-200 rounded-lg hover:bg-gray-100"><i class="fas fa-plus text-[10px]"></i></button>
+                    </div>
+                </div>
+                <!-- Toggles -->
+                <button onclick="toggleAccessFeature('access-contrast', this)" class="w-full text-left p-3 text-sm font-medium rounded-xl hover:bg-gray-50 flex items-center gap-3 transition">
+                    <i class="fas fa-adjust w-5 text-blue-600"></i> Kontras Tinggi
+                </button>
+                <button onclick="toggleAccessFeature('access-grayscale', this)" class="w-full text-left p-3 text-sm font-medium rounded-xl hover:bg-gray-50 flex items-center gap-3 transition">
+                    <i class="fas fa-tint-slash w-5 text-blue-600"></i> Warna Abu-abu
+                </button>
+                <button onclick="toggleAccessFeature('access-underline', this)" class="w-full text-left p-3 text-sm font-medium rounded-xl hover:bg-gray-50 flex items-center gap-3 transition">
+                    <i class="fas fa-underline w-5 text-blue-600"></i> Garis Bawahi Link
+                </button>
+                <button onclick="toggleAccessFeature('access-big-cursor', this)" class="w-full text-left p-3 text-sm font-medium rounded-xl hover:bg-gray-50 flex items-center gap-3 transition">
+                    <i class="fas fa-mouse-pointer w-5 text-blue-600"></i> Kursor Besar
+                </button>
+                <button onclick="toggleAccessFeature('access-stop-animations', this)" class="w-full text-left p-3 text-sm font-medium rounded-xl hover:bg-gray-50 flex items-center gap-3 transition">
+                    <i class="fas fa-stop-circle w-5 text-blue-600"></i> Hentikan Animasi
+                </button>
+                <hr class="my-2 border-gray-100">
+                <button onclick="resetAccessibility()" class="w-full p-3 text-sm font-bold text-red-600 hover:bg-red-50 rounded-xl transition flex items-center justify-center gap-2">
+                    <i class="fas fa-undo"></i> Atur Ulang
+                </button>
+            </div>
+        </div>
+
+        <!-- Complaint Form Modal (Hidden by Default) -->
+        <div id="complaint-modal" class="w-80 md:w-96 bg-white rounded-3xl shadow-2xl border border-gray-100 overflow-hidden hidden animate-slide-up">
+            <div class="bg-red-600 p-4 text-white flex justify-between items-center">
+                <h4 class="font-bold flex items-center gap-2 italic">
+                    <i class="fas fa-headset"></i> Layanan Mandiri
+                </h4>
+                <button onclick="toggleComplaint()" class="hover:rotate-90 transition-transform">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            <div class="p-6 max-h-[60vh] overflow-y-auto">
+                <form action="#" class="space-y-4">
+                    <div>
+                        <label class="block text-[10px] font-bold text-gray-400 uppercase tracking-widest mb-1">Nama *</label>
+                        <input type="text" placeholder="Masukkan nama Anda" required class="w-full px-4 py-2 rounded-xl bg-gray-50 border border-gray-200 text-sm focus:ring-2 focus:ring-red-500 outline-none">
+                    </div>
+                    <div>
+                        <label class="block text-[10px] font-bold text-gray-400 uppercase tracking-widest mb-1">Nomor Telepon/WA *</label>
+                        <input type="text" placeholder="Masukkan nomor HP/WhatsApp" required class="w-full px-4 py-2 rounded-xl bg-gray-50 border border-gray-200 text-sm focus:ring-2 focus:ring-red-500 outline-none">
+                    </div>
+                    <div>
+                        <label class="block text-[10px] font-bold text-gray-400 uppercase tracking-widest mb-1">Kategori Pengaduan *</label>
+                        <select required class="w-full px-4 py-2 rounded-xl bg-gray-50 border border-gray-200 text-sm focus:ring-2 focus:ring-red-500 outline-none bg-white">
+                            <option value="" disabled selected>Pilih kategori pengaduan</option>
+                            <option value="Pelayanan">Pelayanan Publik</option>
+                            <option value="Infrastruktur">Masalah Infrastruktur</option>
+                            <option value="Keamanan">Keamanan & Ketertiban</option>
+                            <option value="Lainnya">Lainnya</option>
+                        </select>
+                    </div>
+                    <div>
+                        <label class="block text-[10px] font-bold text-gray-400 uppercase tracking-widest mb-1">Pengaduan *</label>
+                        <textarea rows="3" placeholder="Masukkan kesan, informasi, atau detail aduan Anda" required class="w-full px-4 py-2 rounded-xl bg-gray-50 border border-gray-200 text-sm focus:ring-2 focus:ring-red-500 outline-none resize-none"></textarea>
+                    </div>
+                    <div>
+                        <label class="block text-[10px] font-bold text-gray-400 uppercase tracking-widest mb-1">Lampiran</label>
+                        <input type="file" class="w-full text-xs text-gray-500 file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-0 file:text-xs file:font-semibold file:bg-red-50 file:text-red-700 hover:file:bg-red-100 cursor-pointer">
+                        <p class="text-[9px] text-gray-400 mt-1 italic">Unggah foto/PDF jika ada</p>
+                    </div>
+                    <button type="submit" class="w-full bg-red-600 hover:bg-red-700 text-white font-bold py-3 rounded-xl shadow-lg transition duration-300 text-sm uppercase tracking-wider">
+                        Kirim
+                    </button>
+                </form>
+            </div>
+        </div>
+
+        <div class="flex items-end gap-3">
+            <!-- Accessibility Button -->
+            <button onclick="toggleAccessibility()" class="bg-blue-700 hover:bg-blue-800 text-white w-12 h-12 rounded-full flex items-center justify-center shadow-lg transition transform hover:scale-105" title="Aksesibilitas">
+                <i class="fas fa-wheelchair text-xl"></i>
+            </button>
+            
+            <!-- Pengaduan Trigger Button -->
+            <button onclick="toggleComplaint()" class="bg-red-600 hover:bg-red-700 text-white px-6 py-3 rounded-full shadow-xl flex items-center gap-2 font-bold transition transform hover:scale-110 active:scale-95 z-50">
+                <i class="fas fa-headset"></i>
+                Pengaduan
+            </button>
+        </div>
+    </div>
+
+    <!-- Script for Slider functionality -->
+    <script>
+        function toggleStats() {
+            const statsBox = document.getElementById('stats-box');
+            const arrow = document.getElementById('stats-arrow');
+            
+            // Tutup modal lain jika sedang terbuka
+            document.getElementById('complaint-modal').classList.add('hidden');
+            const accessModal = document.getElementById('accessibility-modal');
+            accessModal.classList.add('hidden');
+            accessModal.classList.remove('active');
+
+            statsBox.classList.toggle('hidden');
+            statsBox.classList.toggle('active');
+            arrow.classList.toggle('rotate-180');
+        }
+
+        function toggleComplaint() {
+            const complaintModal = document.getElementById('complaint-modal');
+            
+            // Tutup statistik jika sedang terbuka
+            const statsBox = document.getElementById('stats-box');
+            statsBox.classList.add('hidden');
+            statsBox.classList.remove('active');
+            document.getElementById('stats-arrow').classList.remove('rotate-180');
+
+            document.getElementById('accessibility-modal').classList.add('hidden');
+            document.getElementById('accessibility-modal').classList.remove('active');
+
+            complaintModal.classList.toggle('hidden');
+        }
+
+        // Accessibility Functions
+        function toggleAccessibility() {
+            const modal = document.getElementById('accessibility-modal');
+            
+            // Tutup modal lain jika sedang terbuka
+            document.getElementById('complaint-modal').classList.add('hidden');
+            const statsBox = document.getElementById('stats-box');
+            statsBox.classList.add('hidden');
+            statsBox.classList.remove('active');
+            document.getElementById('stats-arrow').classList.remove('rotate-180');
+
+            modal.classList.toggle('hidden');
+            modal.classList.toggle('active');
+        }
+
+        let currentZoom = 100;
+        function updateZoom(step) {
+            currentZoom = Math.min(Math.max(currentZoom + step, 80), 150);
+            document.documentElement.style.setProperty('--access-zoom', currentZoom + '%');
+        }
+
+        let currentSpacing = 0;
+        function updateSpacing(step) {
+            currentSpacing = Math.min(Math.max(currentSpacing + step, 0), 5);
+            document.documentElement.style.setProperty('--access-spacing', currentSpacing === 0 ? 'normal' : currentSpacing + 'px');
+        }
+
+        function toggleAccessFeature(className, btn) {
+            document.body.classList.toggle(className);
+            btn.classList.toggle('access-btn-active');
+        }
+
+        function resetAccessibility() {
+            currentZoom = 100;
+            currentSpacing = 0;
+            document.documentElement.style.setProperty('--access-zoom', '100%');
+            document.documentElement.style.setProperty('--access-spacing', 'normal');
+            
+            const features = ['access-grayscale', 'access-contrast', 'access-underline', 'access-big-cursor', 'access-stop-animations'];
+            features.forEach(f => document.body.classList.remove(f));
+            
+            document.querySelectorAll('.access-btn-active').forEach(b => b.classList.remove('access-btn-active'));
+        }
+
+        // Array of background images for the slider
+        const images = [
+            "https://images.unsplash.com/photo-1555627230-0726ce40499e?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80", // Pemandangan desa/sawah
+            "https://images.unsplash.com/photo-1604085572504-a392ddf0d86a?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80", // Bunga/alam
+            "https://images.unsplash.com/photo-1518509562904-e7ef99cdcc86?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80"  // Pemandangan pegunungan/budaya
+        ];
+
+        let currentIndex = 0;
+        const heroSection = document.getElementById('hero-section');
+
+        function updateBackground() {
+            heroSection.style.backgroundImage = `url('${images[currentIndex]}')`;
+        }
+
+        function nextSlide() {
+            currentIndex = (currentIndex + 1) % images.length;
+            updateBackground();
+        }
+
+        function prevSlide() {
+            currentIndex = (currentIndex - 1 + images.length) % images.length;
+            updateBackground();
+        }
+
+        // Auto slide every 5 seconds
+        setInterval(nextSlide, 5000);
+
+        // Add navbar scroll effect
+        window.addEventListener('scroll', () => {
+            const nav = document.getElementById('navbar');
+            if (window.scrollY > 50) {
+                nav.classList.add('shadow-lg');
+            } else {
+                nav.classList.remove('shadow-lg');
+            }
+        });
+    </script>
+</body>
+</html>

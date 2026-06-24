@@ -1,0 +1,740 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard Desa - Infografis</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- FontAwesome for Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Poppins', 'sans-serif'],
+                    },
+                    colors: {
+                        'desa-green': '#1b5e20',
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        :root {
+            --desa-green: #1b5e20;
+            --active-green: #2ecc71;
+            --text-dark: #333;
+            --bg-light: #f4f7f6;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            margin: 0;
+            background-color: var(--bg-light);
+            padding-top: 80px; /* Offset for fixed navbar */
+        }
+
+        /* Nav link underline effect from index.html */
+        .nav-link {
+            position: relative;
+        }
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            bottom: -4px;
+            left: 0;
+            background-color: white;
+            transition: width 0.3s ease;
+        }
+        .nav-link:hover::after, .nav-link.active::after {
+            width: 100%;
+        }
+
+        /* Seksi Infografis */
+        .infografis-section {
+            max-width: 1200px;
+            margin: 30px auto;
+            background: #fff;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+        }
+
+        /* Menu Tab Navigasi */
+        .infografis-nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: #fff;
+            border-bottom: 1px solid #eee;
+            flex-wrap: wrap;
+            padding: 0 10px;
+        }
+
+        .menu-item {
+            padding: 15px 20px;
+            cursor: pointer;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            transition: all 0.3s ease;
+            position: relative;
+            color: #666;
+        }
+
+        .menu-item i {
+            font-size: 24px;
+            margin-bottom: 8px;
+        }
+
+        .menu-item span {
+            font-size: 0.9rem;
+            font-weight: 500;
+        }
+
+        .menu-item:hover {
+            color: var(--desa-green);
+        }
+
+        /* Indikator Aktif (Garis Hijau) */
+        .menu-item.active {
+            color: var(--desa-green);
+        }
+
+        .menu-item.active::after {
+            content: "";
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 4px;
+            background-color: var(--active-green);
+        }
+
+        /* Konten Dinamis */
+        .infografis-content {
+            padding: 40px;
+            text-align: center;
+            min-height: 400px;
+            background: radial-gradient(circle at top right, #fdfdfd, #f4f7f6);
+        }
+
+        #content-inner {
+            transition: all 0.4s ease-out;
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .content-title {
+            color: var(--desa-green);
+            margin-bottom: 15px;
+            font-size: 1.8rem;
+            text-transform: uppercase;
+            font-weight: 800;
+        }
+
+        .content-description {
+            color: #555;
+            line-height: 1.6;
+            max-width: 800px;
+            margin: 0 auto 30px;
+        }
+
+        /* Visual Enhancements */
+        .tab-visual-container {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            flex-wrap: wrap;
+            margin-top: 20px;
+        }
+
+        .stat-card {
+            background: #fff;
+            padding: 25px;
+            border-radius: 16px;
+            border: 1px solid rgba(0,0,0,0.05);
+            min-width: 180px;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.03);
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            text-align: center;
+        }
+
+        .stat-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 35px rgba(0,0,0,0.07);
+            border-color: var(--active-green);
+        }
+
+        .stat-value {
+            font-size: 2.2rem;
+            font-weight: 800;
+            color: var(--desa-green);
+            display: block;
+            margin-bottom: 5px;
+        }
+
+        .stat-label {
+            font-size: 0.75rem;
+            color: #999;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .progress-card {
+            width: 100%;
+            max-width: 500px;
+            background: white;
+            padding: 20px;
+            border-radius: 15px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.02);
+        }
+
+        .bar-wrap {
+            background: #eee;
+            height: 12px;
+            border-radius: 6px;
+            margin-top: 8px;
+            overflow: hidden;
+        }
+
+        .bar-fill {
+            height: 100%;
+            background: var(--active-green);
+            width: 0;
+            transition: width 1s ease-out;
+        }
+
+        /* Floating Widgets & Accessibility */
+        #stats-box { display: none; }
+        #stats-box.active { display: block; animation: slideUp 0.4s ease-out; }
+        @keyframes slideUp {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        #stats-arrow { transition: transform 0.3s ease; }
+        .rotate-180 { transform: rotate(180deg); }
+
+        .access-grayscale { filter: grayscale(100%) !important; }
+        .access-contrast { filter: invert(1) hue-rotate(180deg) !important; }
+        .access-contrast img, .access-contrast iframe { filter: invert(1) hue-rotate(180deg) !important; }
+        .access-underline a { text-decoration: underline !important; }
+        .access-big-cursor { cursor: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="64" height="64" style="fill:black"><path d="M0 0l20 50 10-20 20-10z"/></svg>'), auto !important; }
+        .access-stop-animations * { transition: none !important; animation: none !important; }
+        
+        #accessibility-modal { display: none; }
+        #accessibility-modal.active { display: block; animation: slideUp 0.4s ease-out; }
+        .access-btn-active { background-color: #1d4ed8 !important; color: white !important; }
+
+        .modal-scroll::-webkit-scrollbar { width: 4px; }
+        .modal-scroll::-webkit-scrollbar-thumb { background: #cbd5e1; border-radius: 10px; }
+
+        :root { --access-zoom: 100%; --access-spacing: normal; }
+        body { font-size: var(--access-zoom); letter-spacing: var(--access-spacing); }
+    </style>
+</head>
+<body>
+    <!-- Navbar -->
+    <nav class="fixed w-full z-50 top-0 transition-all duration-300" id="navbar">
+        <div class="absolute inset-0 bg-black/40 backdrop-blur-sm -z-10"></div>
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-20">
+                <!-- Logo & Brand -->
+                <div class="flex items-center gap-3 cursor-pointer" onclick="window.location.href='index.html'">
+                    <!-- Placeholder Logo -->
+                    <div class="w-12 h-12 bg-white rounded-full flex items-center justify-center p-1 shadow-lg">
+                        <img src="https://lh3.googleusercontent.com/u/0/d/1bW82RmwnfForzqt4GGsGyNCj5GVMvD3s" alt="Logo Desa" class="w-full h-full object-contain">
+                    </div>
+                    <div class="text-white text-left">
+                        <h1 class="text-xl font-bold leading-tight drop-shadow-md">Desa Cimengeunteung</h1>
+                        <p class="text-[10px] opacity-90">Kecamatan Rangkasbitung | Kabupaten Lebak | Banten</p>
+                    </div>
+                </div>
+
+                <!-- Desktop Menu -->
+                <div class="hidden lg:flex space-x-6 text-white font-medium text-sm drop-shadow-md">
+                    <a href="index.html" class="nav-link">Home</a>
+                    <a href="#" class="nav-link">Profil Desa</a>
+                    <a href="dashboard_desa.html" class="nav-link active">Infografis</a>
+                    <a href="listing.html" class="nav-link">Listing</a>
+                    <a href="#" class="nav-link">IDM</a>
+                    <a href="#" class="nav-link">Berita</a>
+                    <a href="#" class="nav-link">Belanja</a>
+                    <a href="#" class="nav-link">PPID</a>
+                </div>
+
+                <!-- Mobile menu button -->
+                <div class="lg:hidden flex items-center">
+                    <button class="text-white hover:text-gray-200 focus:outline-none">
+                        <i class="fas fa-bars text-2xl"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <section class="infografis-section">
+        <div class="infografis-nav">
+            <!-- Brand Title on the Left -->
+            <div class="hidden md:block font-bold text-desa-green px-6 py-4 whitespace-nowrap text-xl">
+                INFOGRAFIS <span class="uppercase">Desa Cimengeunteung</span>
+            </div>
+            
+            <!-- Tabs on the Right -->
+            <div class="flex flex-wrap justify-center md:justify-end flex-grow">
+                <div class="menu-item active" onclick="switchTab(this, 'penduduk')">
+                    <i class="fas fa-users"></i>
+                    <span>Penduduk</span>
+                </div>
+                <div class="menu-item" onclick="switchTab(this, 'apbdes')">
+                    <i class="fas fa-file-invoice-dollar"></i>
+                    <span>APBDes</span>
+                </div>
+                <div class="menu-item" onclick="switchTab(this, 'stunting')">
+                    <i class="fas fa-child"></i>
+                    <span>Stunting</span>
+                </div>
+                <div class="menu-item" onclick="switchTab(this, 'bansos')">
+                    <i class="fas fa-hand-holding-heart"></i>
+                    <span>Bansos</span>
+                </div>
+                <div class="menu-item" onclick="switchTab(this, 'idm')">
+                    <i class="fas fa-chart-line"></i>
+                    <span>IDM</span>
+                </div>
+                <div class="menu-item" onclick="switchTab(this, 'sdgs')">
+                    <i class="fas fa-tasks"></i>
+                    <span>SDGs</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="infografis-content" id="display-area">
+            <div id="content-inner">
+                <h3 class="content-title" id="tab-title">DEMOGRAFI PENDUDUK</h3>
+                <p class="content-description" id="tab-desc">
+                    Menampilkan data statistik kependudukan desa secara real-time, termasuk jumlah penduduk, kelompok usia, dan sebaran wilayah.
+                </p>
+                <div id="tab-visual" class="tab-visual-container">
+                    <div class="stat-card">
+                        <span class="stat-value">1.158</span>
+                        <span class="stat-label">Total Penduduk</span>
+                    </div>
+                    <div class="stat-card">
+                        <span class="stat-value">606</span>
+                        <span class="stat-label">Laki-Laki</span>
+                    </div>
+                    <div class="stat-card">
+                        <span class="stat-value">552</span>
+                        <span class="stat-label">Perempuan</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-desa-green text-white py-16">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12">
+                <!-- Informasi Desa -->
+                <div>
+                    <div class="flex items-center gap-4 mb-6">
+                        <div class="w-16 h-16 bg-white p-2 rounded-xl shadow-md shrink-0">
+                            <img src="https://lh3.googleusercontent.com/u/0/d/1bW82RmwnfForzqt4GGsGyNCj5GVMvD3s" alt="Logo Pemkab Lebak" class="w-full h-full object-contain">
+                        </div>
+                        <h3 class="text-xl font-bold border-b-2 border-white/20 pb-2 flex-grow">Pemerintah Desa Cimangeunteung</h3>
+                    </div>
+                    <div class="space-y-2 text-sm opacity-90 leading-relaxed">
+                        <p>Jl. Raya Cipanas KM 7 Kp. Ciparada<br>RT 007 RW 002</p>
+                        <p>Desa Cimangeunteung, Kecamatan Rangkasbitung, Kabupaten Lebak</p>
+                        <p>Provinsi Banten, 42312</p>
+                        <p class="pt-4 font-semibold">Kode Wilayah: 36.02.01.2016</p>
+                    </div>
+                </div>
+
+                <!-- Hubungi Kami -->
+                <div>
+                    <h3 class="text-xl font-bold mb-6 border-b-2 border-white/20 pb-2 inline-block">Hubungi Kami</h3>
+                    <ul class="space-y-4 text-sm">
+                        <li class="flex items-center gap-3">
+                            <i class="fas fa-phone-alt text-green-300"></i>
+                            <span>082150208664</span>
+                        </li>
+                        <li class="flex items-center gap-3">
+                            <i class="fas fa-envelope text-green-300"></i>
+                            <span>desa.cimangeunteung@lebakkab.go.id</span>
+                        </li>
+                    </ul>
+                    <!-- Sosial Media -->
+                    <div class="mt-6 flex gap-4 text-xl">
+                        <a href="https://facebook.com/username_desa" target="_blank" rel="noopener noreferrer" class="text-white hover:text-green-300 transition" title="Facebook"><i class="fab fa-facebook"></i></a>
+                        <a href="https://instagram.com/username_desa" target="_blank" rel="noopener noreferrer" class="text-white hover:text-green-300 transition" title="Instagram"><i class="fab fa-instagram"></i></a>
+                        <a href="https://twitter.com/username_desa" target="_blank" rel="noopener noreferrer" class="text-white hover:text-green-300 transition" title="X (Twitter)"><i class="fab fa-x-twitter"></i></a>
+                        <a href="https://youtube.com/c/channel_desa" target="_blank" rel="noopener noreferrer" class="text-white hover:text-green-300 transition" title="YouTube"><i class="fab fa-youtube"></i></a>
+                        <a href="https://tiktok.com/@username_desa" target="_blank" rel="noopener noreferrer" class="text-white hover:text-green-300 transition" title="TikTok"><i class="fab fa-tiktok"></i></a>
+                    </div>
+                </div>
+
+                <!-- Nomor Telepon Penting -->
+                <div>
+                    <h3 class="text-xl font-bold mb-6 border-b-2 border-white/20 pb-2 inline-block">Nomor Telepon Penting</h3>
+                    <ul class="space-y-4 text-sm">
+                        <li class="flex items-center gap-3">
+                            <i class="fas fa-user-shield text-green-300"></i>
+                            <span>Uci Sanusi / Kades Cimangeunteung</span>
+                        </li>
+                        <li class="flex items-center gap-3">
+                            <i class="fas fa-ambulance text-green-300"></i>
+                            <span>Yayan / Ambulan Cimangeunteung</span>
+                        </li>
+                    </ul>
+                </div>
+
+                <!-- Jelajahi -->
+                <div>
+                    <h3 class="text-xl font-bold mb-6 border-b-2 border-white/20 pb-2 inline-block">Jelajahi</h3>
+                    <ul class="space-y-3 text-sm">
+                        <li><a href="https://kemendesa.go.id" target="_blank" class="hover:text-green-300 transition flex items-center gap-2"><i class="fas fa-external-link-alt text-[10px]"></i> Website Kemendesa</a></li>
+                        <li><a href="https://kemendagri.go.id" target="_blank" class="hover:text-green-300 transition flex items-center gap-2"><i class="fas fa-external-link-alt text-[10px]"></i> Website Kemendagri</a></li>
+                        <li><a href="https://lebakkab.go.id" target="_blank" class="hover:text-green-300 transition flex items-center gap-2"><i class="fas fa-external-link-alt text-[10px]"></i> Website Kabupaten Lebak</a></li>
+                        <li><a href="https://cekdptonline.kpu.go.id" target="_blank" class="hover:text-green-300 transition flex items-center gap-2"><i class="fas fa-external-link-alt text-[10px]"></i> Cek DPT Online</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="mt-16 pt-8 border-t border-white/10 text-center text-xs opacity-60">
+                <p>© 2026 Powered by PT Digital Desa Indonesia</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Floating Widgets -->
+    <!-- Visitor Counter (Bottom Left) -->
+    <div class="fixed bottom-6 left-6 z-40 flex flex-col items-start gap-4">
+        <!-- Statistik Card Popup -->
+        <div id="stats-box" style="background-color: #4a4a4a;" class="w-72 rounded-3xl shadow-2xl border border-gray-600 overflow-hidden text-white hidden">
+            <!-- Header -->
+            <div class="p-5 border-b border-gray-600">
+                <div class="flex items-center gap-3">
+                    <div class="bg-green-500/20 p-2 rounded-xl text-green-400">
+                        <i class="fas fa-users text-lg"></i>
+                    </div>
+                    <div>
+                        <h4 class="text-sm font-bold tracking-tight">Statistik Pengunjung</h4>
+                        <p class="text-[10px] text-gray-400">11 Mei, 21.39</p>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Data List -->
+            <div class="p-5 space-y-3">
+                <div class="flex justify-between text-xs pb-2 border-b border-gray-600/50">
+                    <span class="opacity-80">Hari Ini</span>
+                    <span class="font-bold">530</span>
+                </div>
+                <div class="flex justify-between text-xs pb-2 border-b border-gray-600/50">
+                    <span class="opacity-80">Kemarin</span>
+                    <span class="font-bold">371</span>
+                </div>
+                <div class="flex justify-between text-xs pb-2 border-b border-gray-600/50">
+                    <span class="opacity-80">Minggu Ini</span>
+                    <span class="font-bold">901</span>
+                </div>
+                <div class="flex justify-between text-xs pb-2 border-b border-gray-600/50">
+                    <span class="opacity-80">Bulan Ini</span>
+                    <span class="font-bold">7.048</span>
+                </div>
+            </div>
+
+            <!-- Footer Summary -->
+            <div class="bg-green-100 p-4 text-green-900 flex flex-col">
+                <span class="text-[8px] font-bold uppercase tracking-widest opacity-70">Total Kunjungan</span>
+                <span class="text-2xl font-black tracking-tighter">507.986</span>
+            </div>
+        </div>
+
+        <!-- Trigger Button -->
+        <button onclick="toggleStats()" class="bg-green-100/90 backdrop-blur-md border border-green-200 rounded-2xl p-3 shadow-lg flex items-center gap-3 cursor-pointer hover:bg-green-200 transition-all duration-300 group">
+            <div class="bg-green-600 text-white w-10 h-10 rounded-xl flex items-center justify-center shadow-md group-hover:scale-110 transition">
+                <i class="fas fa-chart-bar"></i>
+            </div>
+            <div class="text-left pr-2">
+                <p class="text-[10px] text-green-800 font-bold uppercase tracking-wider leading-none mb-1">Kunjungan</p>
+                <p class="text-base font-black text-green-900 leading-none">530 <span class="text-[10px] font-medium opacity-60">Hari Ini</span></p>
+            </div>
+            <div id="stats-arrow" class="text-green-600 ml-1 transition-transform duration-300">
+                <i class="fas fa-chevron-up"></i>
+            </div>
+        </button>
+    </div>
+
+    <!-- Action Buttons (Bottom Right) -->
+    <div class="fixed bottom-6 right-6 z-40 flex flex-col items-end gap-4">
+        <!-- Accessibility Menu Modal -->
+        <div id="accessibility-modal" class="w-72 bg-white rounded-3xl shadow-2xl border border-gray-100 overflow-hidden hidden">
+            <div class="bg-blue-700 p-4 text-white flex justify-between items-center">
+                <h4 class="font-bold flex items-center gap-2">
+                    <i class="fas fa-universal-access"></i> Menu Aksesibilitas
+                </h4>
+                <button type="button" onclick="toggleAccessibility()" class="hover:rotate-90 transition-transform">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            <div class="p-4 grid grid-cols-1 gap-2 modal-scroll max-h-[70vh] overflow-y-auto">
+                <!-- Text Zoom -->
+                <div class="flex items-center justify-between p-2 bg-gray-50 rounded-xl">
+                    <span class="text-xs font-bold text-gray-600 uppercase">Ukuran Teks</span>
+                    <div class="flex gap-1">
+                        <button onclick="updateZoom(-10)" class="w-8 h-8 flex items-center justify-center bg-white border border-gray-200 rounded-lg hover:bg-gray-100"><i class="fas fa-minus text-[10px]"></i></button>
+                        <button onclick="updateZoom(10)" class="w-8 h-8 flex items-center justify-center bg-white border border-gray-200 rounded-lg hover:bg-gray-100"><i class="fas fa-plus text-[10px]"></i></button>
+                    </div>
+                </div>
+                <!-- Kerning -->
+                <div class="flex items-center justify-between p-2 bg-gray-50 rounded-xl">
+                    <span class="text-xs font-bold text-gray-600 uppercase">Jarak Teks</span>
+                    <div class="flex gap-1">
+                        <button onclick="updateSpacing(-0.5)" class="w-8 h-8 flex items-center justify-center bg-white border border-gray-200 rounded-lg hover:bg-gray-100"><i class="fas fa-minus text-[10px]"></i></button>
+                        <button onclick="updateSpacing(0.5)" class="w-8 h-8 flex items-center justify-center bg-white border border-gray-200 rounded-lg hover:bg-gray-100"><i class="fas fa-plus text-[10px]"></i></button>
+                    </div>
+                </div>
+                <!-- Toggles -->
+                <button onclick="toggleAccessFeature('access-contrast', this)" class="w-full text-left p-3 text-sm font-medium rounded-xl hover:bg-gray-50 flex items-center gap-3 transition">
+                    <i class="fas fa-adjust w-5 text-blue-600"></i> Kontras Tinggi
+                </button>
+                <button onclick="toggleAccessFeature('access-grayscale', this)" class="w-full text-left p-3 text-sm font-medium rounded-xl hover:bg-gray-50 flex items-center gap-3 transition">
+                    <i class="fas fa-tint-slash w-5 text-blue-600"></i> Warna Abu-abu
+                </button>
+                <button onclick="toggleAccessFeature('access-underline', this)" class="w-full text-left p-3 text-sm font-medium rounded-xl hover:bg-gray-50 flex items-center gap-3 transition">
+                    <i class="fas fa-underline w-5 text-blue-600"></i> Garis Bawahi Link
+                </button>
+                <button onclick="toggleAccessFeature('access-big-cursor', this)" class="w-full text-left p-3 text-sm font-medium rounded-xl hover:bg-gray-50 flex items-center gap-3 transition">
+                    <i class="fas fa-mouse-pointer w-5 text-blue-600"></i> Kursor Besar
+                </button>
+                <button onclick="toggleAccessFeature('access-stop-animations', this)" class="w-full text-left p-3 text-sm font-medium rounded-xl hover:bg-gray-50 flex items-center gap-3 transition">
+                    <i class="fas fa-stop-circle w-5 text-blue-600"></i> Hentikan Animasi
+                </button>
+                <hr class="my-2 border-gray-100">
+                <button onclick="resetAccessibility()" class="w-full p-3 text-sm font-bold text-red-600 hover:bg-red-50 rounded-xl transition flex items-center justify-center gap-2">
+                    <i class="fas fa-undo"></i> Atur Ulang
+                </button>
+            </div>
+        </div>
+
+        <!-- Complaint Form Modal (Hidden by Default) -->
+        <div id="complaint-modal" class="w-80 md:w-96 bg-white rounded-3xl shadow-2xl border border-gray-100 overflow-hidden hidden animate-slide-up">
+            <div class="bg-red-600 p-4 text-white flex justify-between items-center">
+                <h4 class="font-bold flex items-center gap-2 italic">
+                    <i class="fas fa-headset"></i> Layanan Mandiri
+                </h4>
+                <button onclick="toggleComplaint()" class="hover:rotate-90 transition-transform">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            <div class="p-6 max-h-[60vh] overflow-y-auto">
+                <form action="#" class="space-y-4">
+                    <div>
+                        <label class="block text-[10px] font-bold text-gray-400 uppercase tracking-widest mb-1">Nama *</label>
+                        <input type="text" placeholder="Masukkan nama Anda" required class="w-full px-4 py-2 rounded-xl bg-gray-50 border border-gray-200 text-sm focus:ring-2 focus:ring-red-500 outline-none">
+                    </div>
+                    <div>
+                        <label class="block text-[10px] font-bold text-gray-400 uppercase tracking-widest mb-1">Nomor Telepon/WA *</label>
+                        <input type="text" placeholder="Masukkan nomor HP/WhatsApp" required class="w-full px-4 py-2 rounded-xl bg-gray-50 border border-gray-200 text-sm focus:ring-2 focus:ring-red-500 outline-none">
+                    </div>
+                    <div>
+                        <label class="block text-[10px] font-bold text-gray-400 uppercase tracking-widest mb-1">Kategori Pengaduan *</label>
+                        <select required class="w-full px-4 py-2 rounded-xl bg-gray-50 border border-gray-200 text-sm focus:ring-2 focus:ring-red-500 outline-none bg-white">
+                            <option value="" disabled selected>Pilih kategori pengaduan</option>
+                            <option value="Pelayanan">Pelayanan Publik</option>
+                            <option value="Infrastruktur">Masalah Infrastruktur</option>
+                            <option value="Keamanan">Keamanan & Ketertiban</option>
+                            <option value="Lainnya">Lainnya</option>
+                        </select>
+                    </div>
+                    <div>
+                        <label class="block text-[10px] font-bold text-gray-400 uppercase tracking-widest mb-1">Pengaduan *</label>
+                        <textarea rows="3" placeholder="Masukkan kesan, informasi, atau detail aduan Anda" required class="w-full px-4 py-2 rounded-xl bg-gray-50 border border-gray-200 text-sm focus:ring-2 focus:ring-red-500 outline-none resize-none"></textarea>
+                    </div>
+                    <div>
+                        <label class="block text-[10px] font-bold text-gray-400 uppercase tracking-widest mb-1">Lampiran</label>
+                        <input type="file" class="w-full text-xs text-gray-500 file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-0 file:text-xs file:font-semibold file:bg-red-50 file:text-red-700 hover:file:bg-red-100 cursor-pointer">
+                        <p class="text-[9px] text-gray-400 mt-1 italic">Unggah foto/PDF jika ada</p>
+                    </div>
+                    <button type="submit" class="w-full bg-red-600 hover:bg-red-700 text-white font-bold py-3 rounded-xl shadow-lg transition duration-300 text-sm uppercase tracking-wider">
+                        Kirim
+                    </button>
+                </form>
+            </div>
+        </div>
+
+        <div class="flex items-end gap-3">
+            <!-- Accessibility Button -->
+            <button onclick="toggleAccessibility()" class="bg-blue-700 hover:bg-blue-800 text-white w-12 h-12 rounded-full flex items-center justify-center shadow-lg transition transform hover:scale-105" title="Aksesibilitas">
+                <i class="fas fa-wheelchair text-xl"></i>
+            </button>
+            
+            <!-- Pengaduan Trigger Button -->
+            <button onclick="toggleComplaint()" class="bg-red-600 hover:bg-red-700 text-white px-6 py-3 rounded-full shadow-xl flex items-center gap-2 font-bold transition transform hover:scale-110 active:scale-95 z-50">
+                <i class="fas fa-headset"></i>
+                Pengaduan
+            </button>
+        </div>
+    </div>
+
+    <script>
+        function switchTab(element, category) {
+            document.querySelectorAll('.menu-item').forEach(item => {
+                item.classList.remove('active');
+            });
+            element.classList.add('active');
+
+            const inner = document.getElementById('content-inner');
+            inner.style.opacity = '0';
+            inner.style.transform = 'translateY(15px)';
+
+            setTimeout(() => {
+                const title = document.getElementById('tab-title');
+                const desc = document.getElementById('tab-desc');
+                const visual = document.getElementById('tab-visual');
+
+                const data = {
+                    'penduduk': { 
+                        title: 'DEMOGRAFI PENDUDUK', 
+                        desc: 'Menampilkan data statistik kependudukan desa secara real-time, termasuk jumlah penduduk, kelompok usia, dan sebaran wilayah.',
+                        visual: `
+                            <div class="stat-card"><span class="stat-value">1.158</span><span class="stat-label">Total Penduduk</span></div>
+                            <div class="stat-card"><span class="stat-value">606</span><span class="stat-label">Laki-Laki</span></div>
+                            <div class="stat-card"><span class="stat-value">552</span><span class="stat-label">Perempuan</span></div>
+                        `
+                    },
+                    'apbdes': { 
+                        title: 'TRANSPARANSI APBDES', 
+                        desc: 'Rincian pendapatan dan belanja desa untuk memastikan transparansi pengelolaan dana desa kepada masyarakat.',
+                        visual: `
+                            <div class="progress-card">
+                                <div style="display:flex; justify-content:space-between"><strong>Pendapatan</strong> <span>100%</span></div>
+                                <div class="bar-wrap"><div class="bar-fill" style="width:100%"></div></div>
+                                <div style="display:flex; justify-content:space-between; margin-top:20px"><strong>Belanja</strong> <span>95%</span></div>
+                                <div class="bar-wrap"><div class="bar-fill" style="width:95%; background:#e74c3c"></div></div>
+                            </div>
+                        `
+                    },
+                    'stunting': { 
+                        title: 'DATA STUNTING', 
+                        desc: 'Pemantauan status gizi balita dan program pencegahan stunting di lingkungan desa.',
+                        visual: `
+                            <div class="stat-card" style="border-top: 4px solid #f1c40f"><span class="stat-value">12</span><span class="stat-label">Anak Terpantau</span></div>
+                            <div class="stat-card" style="border-top: 4px solid #2ecc71"><span class="stat-value">0</span><span class="stat-label">Kasus Baru</span></div>
+                        `
+                    },
+                    'bansos': { 
+                        title: 'PENERIMA BANTUAN SOSIAL', 
+                        desc: 'Daftar klasifikasi penerima bantuan sosial seperti BLT, PKH, dan bantuan pangan lainnya.',
+                        visual: `
+                            <div class="stat-card"><i class="fas fa-heart" style="color:#e74c3c; font-size:2rem"></i><span class="stat-value">245</span><span class="stat-label">Penerima PKH</span></div>
+                            <div class="stat-card"><i class="fas fa-wallet" style="color:#2ecc71; font-size:2rem"></i><span class="stat-value">110</span><span class="stat-label">Penerima BLT</span></div>
+                        `
+                    },
+                    'idm': { 
+                        title: 'INDEKS DESA MEMBANGUN (IDM)', 
+                        desc: 'Menampilkan klasifikasi status kemajuan desa berdasarkan dimensi lingkungan, ekonomi, dan sosial.',
+                        visual: `
+                            <div class="stat-card" style="background:#2ecc71; color:white">
+                                <span class="stat-value" style="color:white">MANDIRI</span>
+                                <span class="stat-label" style="color:rgba(255,255,255,0.8)">Status Tahun 2024</span>
+                            </div>
+                            <div class="stat-card"><span class="stat-value">0.8241</span><span class="stat-label">Skor Indeks</span></div>
+                        `
+                    },
+                    'sdgs': { 
+                        title: 'SDGS DESA', 
+                        desc: 'Capaian tujuan pembangunan berkelanjutan di tingkat desa untuk mewujudkan desa tanpa kemiskinan dan kelaparan.',
+                        visual: `
+                            <div class="stat-card"><span class="stat-value">62%</span><span class="stat-label">Target Tercapai</span></div>
+                            <div class="stat-card">
+                                <div style="display:flex; gap:10px; font-size:1.5rem; color:#f39c12">
+                                    <i class="fas fa-leaf"></i> <i class="fas fa-tint"></i> <i class="fas fa-sun"></i>
+                                </div>
+                                <span class="stat-label">Lingkungan</span>
+                            </div>
+                        `
+                    }
+                };
+
+                title.innerText = data[category].title;
+                desc.innerText = data[category].desc;
+                visual.innerHTML = data[category].visual;
+
+                inner.style.opacity = '1';
+                inner.style.transform = 'translateY(0)';
+            }, 400);
+        }
+
+        // Global widget functions
+        function toggleStats() {
+            const statsBox = document.getElementById('stats-box');
+            const arrow = document.getElementById('stats-arrow');
+            document.getElementById('complaint-modal').classList.add('hidden');
+            document.getElementById('accessibility-modal').classList.add('hidden');
+            document.getElementById('accessibility-modal').classList.remove('active');
+            statsBox.classList.toggle('hidden');
+            statsBox.classList.toggle('active');
+            arrow.classList.toggle('rotate-180');
+        }
+
+        function toggleComplaint() {
+            const complaintModal = document.getElementById('complaint-modal');
+            const statsBox = document.getElementById('stats-box');
+            statsBox.classList.add('hidden');
+            statsBox.classList.remove('active');
+            document.getElementById('accessibility-modal').classList.add('hidden');
+            document.getElementById('accessibility-modal').classList.remove('active');
+            complaintModal.classList.toggle('hidden');
+        }
+
+        function toggleAccessibility() {
+            const modal = document.getElementById('accessibility-modal');
+            document.getElementById('complaint-modal').classList.add('hidden');
+            document.getElementById('stats-box').classList.add('hidden');
+            modal.classList.toggle('active');
+        }
+
+        function updateZoom(step) {
+            let currentZoom = parseInt(getComputedStyle(document.documentElement).getPropertyValue('--access-zoom')) || 100;
+            currentZoom = Math.min(Math.max(currentZoom + step, 80), 150);
+            document.documentElement.style.setProperty('--access-zoom', currentZoom + '%');
+        }
+
+        function updateSpacing(step) {
+            let currentSpacing = parseFloat(getComputedStyle(document.documentElement).getPropertyValue('--access-spacing')) || 0;
+            currentSpacing = Math.min(Math.max(currentSpacing + step, 0), 5);
+            document.documentElement.style.setProperty('--access-spacing', currentSpacing === 0 ? 'normal' : currentSpacing + 'px');
+        }
+
+        function toggleAccessFeature(className, btn) {
+            document.body.classList.toggle(className);
+            btn.classList.toggle('access-btn-active');
+        }
+
+        function resetAccessibility() {
+            document.documentElement.style.setProperty('--access-zoom', '100%');
+            document.documentElement.style.setProperty('--access-spacing', 'normal');
+            ['access-grayscale', 'access-contrast', 'access-underline', 'access-big-cursor', 'access-stop-animations'].forEach(f => document.body.classList.remove(f));
+            document.querySelectorAll('.access-btn-active').forEach(b => b.classList.remove('access-btn-active'));
+        }
+
+        window.addEventListener('scroll', () => {
+            const nav = document.getElementById('navbar');
+            if (window.scrollY > 50) { nav.classList.add('shadow-lg'); } else { nav.classList.remove('shadow-lg'); }
+        });
+    </script>
+</body>
+</html>

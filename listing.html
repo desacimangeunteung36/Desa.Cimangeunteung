@@ -1,0 +1,465 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Listing & Peta Desa - Desa Cimengeunteung</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- FontAwesome for Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Poppins', 'sans-serif'],
+                    },
+                    colors: {
+                        'desa-green': '#1b5e20',
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        body { padding-top: 80px; }
+        .nav-link { position: relative; }
+        .nav-link::after {
+            content: ''; position: absolute; width: 0; height: 2px;
+            bottom: -4px; left: 0; background-color: white; transition: width 0.3s ease;
+        }
+        .nav-link:hover::after, .nav-link.active::after { width: 100%; }
+    </style>
+</head>
+<body class="bg-gray-50">
+    <!-- Navbar -->
+    <nav class="fixed w-full z-50 top-0 transition-all duration-300" id="navbar">
+        <div class="absolute inset-0 bg-black/40 backdrop-blur-sm -z-10"></div>
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-20">
+                <!-- Logo & Brand -->
+                <div class="flex items-center gap-3 cursor-pointer" onclick="window.location.href='index.html'">
+                    <div class="w-12 h-12 bg-white rounded-full flex items-center justify-center p-1 shadow-lg">
+                        <img src="https://lh3.googleusercontent.com/u/0/d/1bW82RmwnfForzqt4GGsGyNCj5GVMvD3s" alt="Logo Desa" class="w-full h-full object-contain">
+                    </div>
+                    <div class="text-white">
+                        <h1 class="text-xl font-bold leading-tight drop-shadow-md">Desa Cimengeunteung</h1>
+                        <p class="text-xs opacity-90">Kecamatan Rangkasbitung | Kabupaten Lebak | Banten</p>
+                    </div>
+                </div>
+
+                <!-- Desktop Menu -->
+                <div class="hidden lg:flex space-x-6 text-white font-medium text-sm drop-shadow-md">
+                    <a href="index.html" class="nav-link">Home</a>
+                    <a href="#" class="nav-link">Profil Desa</a>
+                    <a href="dashboard_desa.html" class="nav-link">Infografis</a>
+                    <a href="listing.html" class="nav-link active">Listing</a>
+                    <a href="#" class="nav-link">IDM</a>
+                    <a href="#" class="nav-link">Berita</a>
+                    <a href="#" class="nav-link">Belanja</a>
+                    <a href="#" class="nav-link">PPID</a>
+                </div>
+
+                <!-- Mobile menu button -->
+                <div class="lg:hidden flex items-center">
+                    <button class="text-white hover:text-gray-200 focus:outline-none">
+                        <i class="fas fa-bars text-2xl"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Header Section -->
+    <section class="bg-white py-12 border-b">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <h2 class="text-3xl md:text-4xl font-bold text-desa-green mb-2">Peta Desa</h2>
+            <p class="text-lg text-gray-600 italic">Menampilkan Peta Desa Dengan Interest Point Desa Cimangeunteung</p>
+        </div>
+    </section>
+
+    <!-- Main Listing Content -->
+    <section class="py-12">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+                <!-- Kolom Peta -->
+                <div class="lg:col-span-2 bg-white rounded-2xl overflow-hidden shadow-xl border border-gray-200 h-[550px]">
+                    <iframe 
+                        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d15860.677353995834!2d106.27000000000001!3d-6.370000000000001!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2e421098e9b05777%3A0x40157ecbd7b4940!2sCimangeunteung%2C%20Kec.%20Rangkasbitung%2C%20Kabupaten%20Lebak%2C%20Banten!5e0!3m2!1sid!2sid!4v1715420000000!5m2!1sid!2sid" 
+                        width="100%" height="100%" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade">
+                    </iframe>
+                </div>
+
+                <!-- Kolom Interest Points -->
+                <div class="space-y-6">
+                    <div class="bg-white p-6 rounded-2xl shadow-lg border border-gray-100">
+                        <h3 class="text-xl font-bold text-desa-green mb-6 flex items-center gap-2">
+                            <i class="fas fa-map-marked-alt"></i> Interest Points
+                        </h3>
+                        <ul class="space-y-4">
+                            <li class="flex items-start gap-4 p-4 hover:bg-green-50 rounded-xl transition-colors border border-transparent hover:border-green-100">
+                                <div class="bg-green-600 text-white w-10 h-10 rounded-full flex items-center justify-center shrink-0 shadow-md">1</div>
+                                <div>
+                                    <strong class="block text-gray-800">Kantor Desa Cimangeunteung</strong>
+                                    <p class="text-sm text-gray-500">Pusat administrasi desa</p>
+                                </div>
+                            </li>
+                            <li class="flex items-start gap-4 p-4 hover:bg-blue-50 rounded-xl transition-colors border border-transparent hover:border-blue-100">
+                                <div class="bg-blue-600 text-white w-10 h-10 rounded-full flex items-center justify-center shrink-0 shadow-md">2</div>
+                                <div>
+                                    <strong class="block text-gray-800">Puskesmas Pembantu</strong>
+                                    <p class="text-sm text-gray-500">Layanan kesehatan masyarakat</p>
+                                </div>
+                            </li>
+                            <li class="flex items-start gap-4 p-4 hover:bg-yellow-50 rounded-xl transition-colors border border-transparent hover:border-yellow-100">
+                                <div class="bg-yellow-600 text-white w-10 h-10 rounded-full flex items-center justify-center shrink-0 shadow-md">3</div>
+                                <div>
+                                    <strong class="block text-gray-800">Pasar Desa</strong>
+                                    <p class="text-sm text-gray-500">Pusat ekonomi warga</p>
+                                </div>
+                            </li>
+                            <li class="flex items-start gap-4 p-4 hover:bg-purple-50 rounded-xl transition-colors border border-transparent hover:border-purple-100">
+                                <div class="bg-purple-600 text-white w-10 h-10 rounded-full flex items-center justify-center shrink-0 shadow-md">4</div>
+                                <div>
+                                    <strong class="block text-gray-800">Area Wisata Lokal</strong>
+                                    <p class="text-sm text-gray-500">Potensi alam Cimangeunteung</p>
+                                </div>
+                            </li>
+                        </ul>
+                        <div class="mt-8">
+                            <button class="w-full py-3 bg-desa-green text-white font-bold rounded-xl shadow-lg hover:bg-green-700 transition">
+                                Lihat Detail Semua Titik
+                            </button>
+                        </div>
+                    </div>
+                    
+                    <!-- Info Box Aditional -->
+                    <div class="bg-blue-600 p-6 rounded-2xl text-white shadow-lg">
+                        <h4 class="font-bold mb-2 flex items-center gap-2">
+                            <i class="fas fa-info-circle"></i> Butuh Navigasi?
+                        </h4>
+                        <p class="text-sm opacity-90 leading-relaxed">Klik pada marker di peta untuk melihat rute langsung melalui Google Maps ke lokasi tujuan Anda.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-desa-green text-white py-16">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12">
+                <!-- Informasi Desa -->
+                <div>
+                    <div class="flex items-center gap-4 mb-6">
+                        <div class="w-16 h-16 bg-white p-2 rounded-xl shadow-md shrink-0">
+                            <img src="https://lh3.googleusercontent.com/u/0/d/1bW82RmwnfForzqt4GGsGyNCj5GVMvD3s" alt="Logo Pemkab Lebak" class="w-full h-full object-contain">
+                        </div>
+                        <h3 class="text-xl font-bold border-b-2 border-white/20 pb-2 flex-grow">Pemerintah Desa Cimangeunteung</h3>
+                    </div>
+                    <div class="space-y-2 text-sm opacity-90 leading-relaxed">
+                        <p>Jl. Raya Cipanas KM 7 Kp. Ciparada<br>RT 007 RW 002</p>
+                        <p>Desa Cimangeunteung, Kecamatan Rangkasbitung, Kabupaten Lebak</p>
+                        <p>Provinsi Banten, 42312</p>
+                        <p class="pt-4 font-semibold">Kode Wilayah: 36.02.01.2016</p>
+                    </div>
+                </div>
+
+                <!-- Hubungi Kami -->
+                <div>
+                    <h3 class="text-xl font-bold mb-6 border-b-2 border-white/20 pb-2 inline-block">Hubungi Kami</h3>
+                    <ul class="space-y-4 text-sm">
+                        <li class="flex items-center gap-3">
+                            <i class="fas fa-phone-alt text-green-300"></i>
+                            <span>082150208664</span>
+                        </li>
+                        <li class="flex items-center gap-3">
+                            <i class="fas fa-envelope text-green-300"></i>
+                            <span>desa.cimangeunteung@lebakkab.go.id</span>
+                        </li>
+                    </ul>
+                    <!-- Sosial Media -->
+                    <div class="mt-6 flex gap-4 text-xl">
+                        <a href="https://facebook.com/username_desa" target="_blank" rel="noopener noreferrer" class="text-white hover:text-green-300 transition" title="Facebook"><i class="fab fa-facebook"></i></a>
+                        <a href="https://instagram.com/username_desa" target="_blank" rel="noopener noreferrer" class="text-white hover:text-green-300 transition" title="Instagram"><i class="fab fa-instagram"></i></a>
+                        <a href="https://twitter.com/username_desa" target="_blank" rel="noopener noreferrer" class="text-white hover:text-green-300 transition" title="X (Twitter)"><i class="fab fa-x-twitter"></i></a>
+                        <a href="https://youtube.com/c/channel_desa" target="_blank" rel="noopener noreferrer" class="text-white hover:text-green-300 transition" title="YouTube"><i class="fab fa-youtube"></i></a>
+                        <a href="https://tiktok.com/@username_desa" target="_blank" rel="noopener noreferrer" class="text-white hover:text-green-300 transition" title="TikTok"><i class="fab fa-tiktok"></i></a>
+                    </div>
+                </div>
+
+                <!-- Nomor Telepon Penting -->
+                <div>
+                    <h3 class="text-xl font-bold mb-6 border-b-2 border-white/20 pb-2 inline-block">Nomor Telepon Penting</h3>
+                    <ul class="space-y-4 text-sm">
+                        <li class="flex items-center gap-3">
+                            <i class="fas fa-user-shield text-green-300"></i>
+                            <span>Uci Sanusi / Kades Cimangeunteung</span>
+                        </li>
+                        <li class="flex items-center gap-3">
+                            <i class="fas fa-ambulance text-green-300"></i>
+                            <span>Yayan / Ambulan Cimangeunteung</span>
+                        </li>
+                    </ul>
+                </div>
+
+                <!-- Jelajahi -->
+                <div>
+                    <h3 class="text-xl font-bold mb-6 border-b-2 border-white/20 pb-2 inline-block">Jelajahi</h3>
+                    <ul class="space-y-3 text-sm">
+                        <li><a href="https://kemendesa.go.id" target="_blank" class="hover:text-green-300 transition flex items-center gap-2"><i class="fas fa-external-link-alt text-[10px]"></i> Website Kemendesa</a></li>
+                        <li><a href="https://kemendagri.go.id" target="_blank" class="hover:text-green-300 transition flex items-center gap-2"><i class="fas fa-external-link-alt text-[10px]"></i> Website Kemendagri</a></li>
+                        <li><a href="https://lebakkab.go.id" target="_blank" class="hover:text-green-300 transition flex items-center gap-2"><i class="fas fa-external-link-alt text-[10px]"></i> Website Kabupaten Lebak</a></li>
+                        <li><a href="https://cekdptonline.kpu.go.id" target="_blank" class="hover:text-green-300 transition flex items-center gap-2"><i class="fas fa-external-link-alt text-[10px]"></i> Cek DPT Online</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="mt-16 pt-8 border-t border-white/10 text-center text-xs opacity-60">
+                <p>© 2026 Powered by PT Digital Desa Indonesia</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Floating Widgets -->
+    <!-- Visitor Counter (Bottom Left) -->
+    <div class="fixed bottom-6 left-6 z-40 flex flex-col items-start gap-4">
+        <!-- Statistik Card Popup -->
+        <div id="stats-box" style="background-color: #4a4a4a;" class="w-72 rounded-3xl shadow-2xl border border-gray-600 overflow-hidden text-white hidden">
+            <!-- Header -->
+            <div class="p-5 border-b border-gray-600">
+                <div class="flex items-center gap-3">
+                    <div class="bg-green-500/20 p-2 rounded-xl text-green-400">
+                        <i class="fas fa-users text-lg"></i>
+                    </div>
+                    <div>
+                        <h4 class="text-sm font-bold tracking-tight">Statistik Pengunjung</h4>
+                        <p class="text-[10px] text-gray-400">11 Mei, 21.39</p>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Data List -->
+            <div class="p-5 space-y-3">
+                <div class="flex justify-between text-xs pb-2 border-b border-gray-600/50">
+                    <span class="opacity-80">Hari Ini</span>
+                    <span class="font-bold">530</span>
+                </div>
+                <div class="flex justify-between text-xs pb-2 border-b border-gray-600/50">
+                    <span class="opacity-80">Kemarin</span>
+                    <span class="font-bold">371</span>
+                </div>
+                <div class="flex justify-between text-xs pb-2 border-b border-gray-600/50">
+                    <span class="opacity-80">Minggu Ini</span>
+                    <span class="font-bold">901</span>
+                </div>
+                <div class="flex justify-between text-xs pb-2 border-b border-gray-600/50">
+                    <span class="opacity-80">Bulan Ini</span>
+                    <span class="font-bold">7.048</span>
+                </div>
+            </div>
+
+            <!-- Footer Summary -->
+            <div class="bg-green-100 p-4 text-green-900 flex flex-col">
+                <span class="text-[8px] font-bold uppercase tracking-widest opacity-70">Total Kunjungan</span>
+                <span class="text-2xl font-black tracking-tighter">507.986</span>
+            </div>
+        </div>
+
+        <!-- Trigger Button -->
+        <button onclick="toggleStats()" class="bg-green-100/90 backdrop-blur-md border border-green-200 rounded-2xl p-3 shadow-lg flex items-center gap-3 cursor-pointer hover:bg-green-200 transition-all duration-300 group">
+            <div class="bg-green-600 text-white w-10 h-10 rounded-xl flex items-center justify-center shadow-md group-hover:scale-110 transition">
+                <i class="fas fa-chart-bar"></i>
+            </div>
+            <div class="text-left pr-2">
+                <p class="text-[10px] text-green-800 font-bold uppercase tracking-wider leading-none mb-1">Kunjungan</p>
+                <p class="text-base font-black text-green-900 leading-none">530 <span class="text-[10px] font-medium opacity-60">Hari Ini</span></p>
+            </div>
+            <div id="stats-arrow" class="text-green-600 ml-1 transition-transform duration-300">
+                <i class="fas fa-chevron-up"></i>
+            </div>
+        </button>
+    </div>
+
+    <!-- Action Buttons (Bottom Right) -->
+    <div class="fixed bottom-6 right-6 z-40 flex flex-col items-end gap-4">
+        <!-- Accessibility Menu Modal -->
+        <div id="accessibility-modal" class="w-72 bg-white rounded-3xl shadow-2xl border border-gray-100 overflow-hidden hidden">
+            <div class="bg-blue-700 p-4 text-white flex justify-between items-center">
+                <h4 class="font-bold flex items-center gap-2">
+                    <i class="fas fa-universal-access"></i> Menu Aksesibilitas
+                </h4>
+                <button type="button" onclick="toggleAccessibility()" class="hover:rotate-90 transition-transform">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            <div class="p-4 grid grid-cols-1 gap-2 modal-scroll max-h-[70vh] overflow-y-auto">
+                <!-- Text Zoom -->
+                <div class="flex items-center justify-between p-2 bg-gray-50 rounded-xl">
+                    <span class="text-xs font-bold text-gray-600 uppercase">Ukuran Teks</span>
+                    <div class="flex gap-1">
+                        <button onclick="updateZoom(-10)" class="w-8 h-8 flex items-center justify-center bg-white border border-gray-200 rounded-lg hover:bg-gray-100"><i class="fas fa-minus text-[10px]"></i></button>
+                        <button onclick="updateZoom(10)" class="w-8 h-8 flex items-center justify-center bg-white border border-gray-200 rounded-lg hover:bg-gray-100"><i class="fas fa-plus text-[10px]"></i></button>
+                    </div>
+                </div>
+                <!-- Kerning -->
+                <div class="flex items-center justify-between p-2 bg-gray-50 rounded-xl">
+                    <span class="text-xs font-bold text-gray-600 uppercase">Jarak Teks</span>
+                    <div class="flex gap-1">
+                        <button onclick="updateSpacing(-0.5)" class="w-8 h-8 flex items-center justify-center bg-white border border-gray-200 rounded-lg hover:bg-gray-100"><i class="fas fa-minus text-[10px]"></i></button>
+                        <button onclick="updateSpacing(0.5)" class="w-8 h-8 flex items-center justify-center bg-white border border-gray-200 rounded-lg hover:bg-gray-100"><i class="fas fa-plus text-[10px]"></i></button>
+                    </div>
+                </div>
+                <!-- Toggles -->
+                <button onclick="toggleAccessFeature('access-contrast', this)" class="w-full text-left p-3 text-sm font-medium rounded-xl hover:bg-gray-50 flex items-center gap-3 transition">
+                    <i class="fas fa-adjust w-5 text-blue-600"></i> Kontras Tinggi
+                </button>
+                <button onclick="toggleAccessFeature('access-grayscale', this)" class="w-full text-left p-3 text-sm font-medium rounded-xl hover:bg-gray-50 flex items-center gap-3 transition">
+                    <i class="fas fa-tint-slash w-5 text-blue-600"></i> Warna Abu-abu
+                </button>
+                <button onclick="toggleAccessFeature('access-underline', this)" class="w-full text-left p-3 text-sm font-medium rounded-xl hover:bg-gray-50 flex items-center gap-3 transition">
+                    <i class="fas fa-underline w-5 text-blue-600"></i> Garis Bawahi Link
+                </button>
+                <button onclick="toggleAccessFeature('access-big-cursor', this)" class="w-full text-left p-3 text-sm font-medium rounded-xl hover:bg-gray-50 flex items-center gap-3 transition">
+                    <i class="fas fa-mouse-pointer w-5 text-blue-600"></i> Kursor Besar
+                </button>
+                <button onclick="toggleAccessFeature('access-stop-animations', this)" class="w-full text-left p-3 text-sm font-medium rounded-xl hover:bg-gray-50 flex items-center gap-3 transition">
+                    <i class="fas fa-stop-circle w-5 text-blue-600"></i> Hentikan Animasi
+                </button>
+                <hr class="my-2 border-gray-100">
+                <button onclick="resetAccessibility()" class="w-full p-3 text-sm font-bold text-red-600 hover:bg-red-50 rounded-xl transition flex items-center justify-center gap-2">
+                    <i class="fas fa-undo"></i> Atur Ulang
+                </button>
+            </div>
+        </div>
+
+        <!-- Complaint Form Modal (Hidden by Default) -->
+        <div id="complaint-modal" class="w-80 md:w-96 bg-white rounded-3xl shadow-2xl border border-gray-100 overflow-hidden hidden animate-slide-up">
+            <div class="bg-red-600 p-4 text-white flex justify-between items-center">
+                <h4 class="font-bold flex items-center gap-2 italic">
+                    <i class="fas fa-headset"></i> Layanan Mandiri
+                </h4>
+                <button onclick="toggleComplaint()" class="hover:rotate-90 transition-transform">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            <div class="p-6 max-h-[60vh] overflow-y-auto">
+                <form action="#" class="space-y-4">
+                    <div>
+                        <label class="block text-[10px] font-bold text-gray-400 uppercase tracking-widest mb-1">Nama *</label>
+                        <input type="text" placeholder="Masukkan nama Anda" required class="w-full px-4 py-2 rounded-xl bg-gray-50 border border-gray-200 text-sm focus:ring-2 focus:ring-red-500 outline-none">
+                    </div>
+                    <div>
+                        <label class="block text-[10px] font-bold text-gray-400 uppercase tracking-widest mb-1">Nomor Telepon/WA *</label>
+                        <input type="text" placeholder="Masukkan nomor HP/WhatsApp" required class="w-full px-4 py-2 rounded-xl bg-gray-50 border border-gray-200 text-sm focus:ring-2 focus:ring-red-500 outline-none">
+                    </div>
+                    <div>
+                        <label class="block text-[10px] font-bold text-gray-400 uppercase tracking-widest mb-1">Kategori Pengaduan *</label>
+                        <select required class="w-full px-4 py-2 rounded-xl bg-gray-50 border border-gray-200 text-sm focus:ring-2 focus:ring-red-500 outline-none bg-white">
+                            <option value="" disabled selected>Pilih kategori pengaduan</option>
+                            <option value="Pelayanan">Pelayanan Publik</option>
+                            <option value="Infrastruktur">Masalah Infrastruktur</option>
+                            <option value="Keamanan">Keamanan & Ketertiban</option>
+                            <option value="Lainnya">Lainnya</option>
+                        </select>
+                    </div>
+                    <div>
+                        <label class="block text-[10px] font-bold text-gray-400 uppercase tracking-widest mb-1">Pengaduan *</label>
+                        <textarea rows="3" placeholder="Masukkan kesan, informasi, atau detail aduan Anda" required class="w-full px-4 py-2 rounded-xl bg-gray-50 border border-gray-200 text-sm focus:ring-2 focus:ring-red-500 outline-none resize-none"></textarea>
+                    </div>
+                    <div>
+                        <label class="block text-[10px] font-bold text-gray-400 uppercase tracking-widest mb-1">Lampiran</label>
+                        <input type="file" class="w-full text-xs text-gray-500 file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-0 file:text-xs file:font-semibold file:bg-red-50 file:text-red-700 hover:file:bg-red-100 cursor-pointer">
+                        <p class="text-[9px] text-gray-400 mt-1 italic">Unggah foto/PDF jika ada</p>
+                    </div>
+                    <button type="submit" class="w-full bg-red-600 hover:bg-red-700 text-white font-bold py-3 rounded-xl shadow-lg transition duration-300 text-sm uppercase tracking-wider">
+                        Kirim
+                    </button>
+                </form>
+            </div>
+        </div>
+
+        <div class="flex items-end gap-3">
+            <!-- Accessibility Button -->
+            <button onclick="toggleAccessibility()" class="bg-blue-700 hover:bg-blue-800 text-white w-12 h-12 rounded-full flex items-center justify-center shadow-lg transition transform hover:scale-105" title="Aksesibilitas">
+                <i class="fas fa-wheelchair text-xl"></i>
+            </button>
+            
+            <!-- Pengaduan Trigger Button -->
+            <button onclick="toggleComplaint()" class="bg-red-600 hover:bg-red-700 text-white px-6 py-3 rounded-full shadow-xl flex items-center gap-2 font-bold transition transform hover:scale-110 active:scale-95 z-50">
+                <i class="fas fa-headset"></i>
+                Pengaduan
+            </button>
+        </div>
+    </div>
+
+    <script>
+        function toggleStats() {
+            const statsBox = document.getElementById('stats-box');
+            const arrow = document.getElementById('stats-arrow');
+            const complaintModal = document.getElementById('complaint-modal');
+            if (!complaintModal.classList.contains('hidden')) { complaintModal.classList.add('hidden'); }
+            const accessModal = document.getElementById('accessibility-modal');
+            if (accessModal.classList.contains('active')) { accessModal.classList.remove('active'); }
+            statsBox.classList.toggle('hidden');
+            statsBox.classList.toggle('active');
+            arrow.classList.toggle('rotate-180');
+        }
+
+        function toggleComplaint() {
+            const complaintModal = document.getElementById('complaint-modal');
+            const statsBox = document.getElementById('stats-box');
+            if (statsBox.classList.contains('active')) {
+                statsBox.classList.add('hidden');
+                statsBox.classList.remove('active');
+                document.getElementById('stats-arrow').classList.remove('rotate-180');
+            }
+            complaintModal.classList.toggle('hidden');
+        }
+
+        function toggleAccessibility() {
+            const modal = document.getElementById('accessibility-modal');
+            document.getElementById('complaint-modal').classList.add('hidden');
+            const statsBox = document.getElementById('stats-box');
+            statsBox.classList.add('hidden');
+            statsBox.classList.remove('active');
+            document.getElementById('stats-arrow').classList.remove('rotate-180');
+
+            modal.classList.toggle('hidden');
+            modal.classList.toggle('active');
+        }
+
+        function updateZoom(step) {
+            let currentZoom = parseInt(getComputedStyle(document.documentElement).getPropertyValue('--access-zoom')) || 100;
+            currentZoom = Math.min(Math.max(currentZoom + step, 80), 150);
+            document.documentElement.style.setProperty('--access-zoom', currentZoom + '%');
+        }
+
+        function updateSpacing(step) {
+            let currentSpacing = parseFloat(getComputedStyle(document.documentElement).getPropertyValue('--access-spacing')) || 0;
+            currentSpacing = Math.min(Math.max(currentSpacing + step, 0), 5);
+            document.documentElement.style.setProperty('--access-spacing', currentSpacing === 0 ? 'normal' : currentSpacing + 'px');
+        }
+
+        function toggleAccessFeature(className, btn) {
+            document.body.classList.toggle(className);
+            btn.classList.toggle('access-btn-active');
+        }
+
+        function resetAccessibility() {
+            document.documentElement.style.setProperty('--access-zoom', '100%');
+            document.documentElement.style.setProperty('--access-spacing', 'normal');
+            ['access-grayscale', 'access-contrast', 'access-underline', 'access-big-cursor', 'access-stop-animations'].forEach(f => document.body.classList.remove(f));
+            document.querySelectorAll('.access-btn-active').forEach(b => b.classList.remove('access-btn-active'));
+        }
+
+        window.addEventListener('scroll', () => {
+            const nav = document.getElementById('navbar');
+            if (window.scrollY > 50) { nav.classList.add('shadow-lg'); } else { nav.classList.remove('shadow-lg'); }
+        });
+    </script>
+</body>
+</html>
